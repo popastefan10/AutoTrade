@@ -1,0 +1,8 @@
+/* Contact */
+#contact li {
+  list-style-type: none;
+}
+
+#contact a {
+  text-decoration: none;
+}

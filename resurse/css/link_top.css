@@ -1,0 +1,84 @@
+:root {
+  --link-top-bottom: 30px;
+  --link-top-right: 15px;
+  --link-top-border-size: 10px;
+  --link-top-square-size: 30px;
+  --link-top-opacity: 0.3;
+
+  --link-top-border-color: var(--blue5);
+
+  --link-top-triangle-color: var(--blue5);
+
+  --link-top-triangle-border-big: 25px;
+  --link-top-triangle-border-small: 15px;
+
+  --link-top-triangle-left: -10px;
+  --link-top-triangle-bottom: 0px;
+
+  --hover-transition-duration: 0.5s;
+}
+
+.link-top {
+  bottom: var(--link-top-bottom);
+  right: 0;
+  position: fixed;
+  z-index: 10;
+}
+
+.link-top a {
+  position: relative;
+  float: right;
+  right: var(--link-top-right);
+}
+
+/* Opacitatea */
+.link-top div {
+  opacity: var(--link-top-opacity);
+}
+
+/* Patratul rotit */
+.link-top a > div {
+  border: 2px solid var(--link-top-border-color);
+  width: var(--link-top-square-size);
+  height: var(--link-top-square-size);
+  background-color: white;
+
+  transform: rotate(45deg);
+  transition: background-color var(--hover-transition-duration) linear;
+}
+
+/* Triunghiul rotunjit */
+.link-top-triangle {
+  position: absolute;
+  left: var(--link-top-triangle-left);
+  bottom: var(--link-top-triangle-bottom);
+  padding: 0;
+  margin: 0;
+
+  width: 0;
+  height: 0;
+
+  border-radius: 50%;
+  border-width: var(--link-top-triangle-border-big)
+    var(--link-top-triangle-border-small) var(--link-top-triangle-border-big)
+    var(--link-top-triangle-border-small);
+  border-style: solid;
+  border-color: transparent transparent var(--link-top-triangle-color)
+    transparent;
+
+  transform: rotate(-45deg);
+  transition: border-color var(--hover-transition-duration) linear;
+}
+
+/* Animatie hover */
+.link-top a:hover > div {
+  background-color: var(--link-top-triangle-color);
+}
+
+.link-top a:hover .link-top-triangle {
+  border-color: transparent transparent white transparent;
+}
+
+.link-top a:hover div {
+  opacity: 1;
+}

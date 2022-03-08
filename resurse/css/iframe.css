@@ -1,0 +1,68 @@
+:root {
+  --iframe-border-color: var(--blue5);
+  --iframe-link-border-color: var(--blue5);
+  --iframe-link-border-radius: 5px;
+  --iframe-link-right: calc(
+    -1 * var(--iframe-link-border-radius)
+  ); /* Right offset */
+
+  --iframe-link-padding: 5px;
+  --iframe-link-padding-right: calc(
+    var(--iframe-link-padding) - var(--iframe-link-right)
+  );
+
+  --iframe-link-bkg-color: var(--light-blue2);
+  --iframe-link-color: var(--blue6);
+
+  --iframe-link-hover-bkg-color: var(--blue5);
+  --iframe-link-hover-transition-duration: 0.5s;
+}
+
+/* Containerul principal */
+.flex-iframe-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+/* Container-ul link-urilor */
+.flex-iframe-link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Iframe-ul */
+.flex-iframe-container iframe {
+  border: 2px solid var(--iframe-border-color);
+  z-index: 2;
+}
+
+/* Link-urile iframe-ului */
+.flex-iframe-link-container a {
+  text-decoration: none;
+  letter-spacing: 1px;
+  background-color: var(--iframe-link-bkg-color);
+  color: var(--iframe-link-color);
+
+  position: relative;
+  right: var(--iframe-link-right);
+  z-index: 1;
+
+  margin-bottom: 2px;
+  padding: var(--iframe-link-padding);
+  padding-right: var(--iframe-link-padding-right);
+  padding-left: 7px;
+
+  border: 2px solid var(--iframe-border-color);
+  border-radius: var(--iframe-link-border-radius);
+
+  box-shadow: 2px 0.5px 1px var(--iframe-border-color) inset; /* horizontal vertical blur */
+
+  transition: background-color var(--hover-transition-duration) linear;
+}
+
+/* Animatie hover */
+.flex-iframe-container a:hover {
+  background-color: var(--iframe-link-hover-bkg-color);
+  color: white;
+}
