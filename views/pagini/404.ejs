@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Stefan Popa" />
+    <meta
+      name="keywords"
+      content="masina, coupe, sedan, SUV, hatchback, estate, sport"
+    />
+    <meta name="description" content="Anunturi cu masini de vanzare" />
+
+    <title>Eroare 404</title>
+
+    <%- include("../fragmente/head.ejs"); %>
+
+    <!-- CSS -->
+    <link href="./resurse/css/main.css" rel="stylesheet" type="text/css" />
+    <link
+      href="./resurse/css/nav.css"
+      rel="stylesheet"
+      media="screen"
+      type="text/css"
+    />
+    <link
+      href="./resurse/css/nav_small.css"
+      rel="stylesheet"
+      media="screen and (max-width: 700px)"
+      type="text/css"
+    />
+    <link href="./resurse/css/colors.css" rel="stylesheet" type="text/css" />
+    <link href="./resurse/css/iframe.css" rel="stylesheet" type="text/css" />
+    <link href="./resurse/css/link_top.css" rel="stylesheet" type="text/css" />
+    <link href="./resurse/css/footer.css" rel="stylesheet" type="text/css" />
+    <link href="./resurse/css/tabel.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/63313db439.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <%- include("../fragmente/header.ejs"); %>
+
+    <main>
+      <div class="error_container">
+        <p>Pagina nu a fost gasita!</p>
+        <img src="resurse/imagini/error_404.jpg" alt="Eroare 404" width="600px" height="auto">
+      </div>
+    </main>
+
+    <%- include("../fragmente/footer.ejs"); %>
+  </body>
+</html>

@@ -40,12 +40,12 @@ h2 {
   }
 
   #grid_main {
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
     grid-template-areas:
-      "grid_main_area_1 grid_main_area_1 grid_main_area_1"
-      "grid_main_area_8 grid_main_area_8 grid_main_area_8"
-      "grid_main_area_3 grid_main_area_2 grid_main_area_4"
-      "grid_main_area_5 grid_main_area_6 grid_main_area_7";
+      "grid_main_area_1 grid_main_area_1 grid_main_area_1 grid_main_area_1"
+      "grid_main_area_8 grid_main_area_8 grid_main_area_8 grid_main_area_8"
+      "grid_main_area_3 grid_main_area_2 grid_main_area_2 grid_main_area_4"
+      "grid_main_area_5 grid_main_area_6 grid_main_area_7 grid_main_area_7";
   }
 }
 

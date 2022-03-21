@@ -1,0 +1,108 @@
+:root {
+  --nav_height: 3rem;
+  --nav_background_color: var(--blue5);
+  --nav_text_color: white;
+  --menu_btn_hover_color: var(--blue1);
+}
+
+nav {
+  height: var(--nav_height);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0; /* Ca sa mearga position: sticky */
+  position: sticky;
+  z-index: 10;
+
+  background-color: var(--nav_background_color);
+  color: var(--nav_text_color);
+
+  // Initial meniul este ascuns
+  ul.menu {
+    display: none;
+    position: absolute;
+    width: 100%;
+
+    div {
+      width: 100%;
+    }
+
+    // Butoanele principale
+    > li {
+      display: block;
+      position: relative;
+      float: none;
+      transition: none;
+      width: 100%;
+
+      > div > a {
+        text-shadow: none;
+      }
+    }
+  }
+}
+
+#hamburger {
+  display: block;
+  height: var(--nav_height);
+
+  // Hamburger logo
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+// Hamburger logo-ul este apasat
+#ch-menu:checked {
+  // Meniul apare cand dau click
+  + ul.menu {
+    display: block;
+    position: relative;
+    z-index: 10;
+
+    // Animatie hover
+    li {
+      background-color: var(--nav_background_color);
+      transition: background-color var(--menu_btn_bkg_color_transition_duration)
+        linear;
+    }
+
+    li:hover {
+      background-color: var(--menu_btn_hover_color);
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    // Animatie hover submeniu
+    li ul {
+      position: relative;
+    }
+
+    li:hover ul {
+      display: block;
+    }
+
+    // Animatie letter spacing
+    > li {
+      > div,
+      > a {
+        transform-origin: center;
+        animation-name: letter_decompressing;
+        animation-duration: 0.6s;
+        animation-timing-function: linear;
+      }
+    }
+  }
+}
+
+@keyframes letter_decompressing {
+  0% {
+    letter-spacing: -5px;
+  }
+  100% {
+    letter-spacing: 1px;
+  }
+}

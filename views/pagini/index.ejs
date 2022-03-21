@@ -11,7 +11,7 @@
 
     <title>AutoTrade</title>
 
-    <!-- Icon -->
+    <!-- Icon
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -36,9 +36,9 @@
       color="#00a1ff"
     />
     <meta name="msapplication-TileColor" content="#2d89ef" />
-    <meta name="theme-color" content="#bbe6ff" />
+    <meta name="theme-color" content="#bbe6ff" /> -->
 
-    <!-- CSS -->
+    <!-- CSS
     <link href="./resurse/css/main.css" rel="stylesheet" type="text/css" />
     <link
       href="./resurse/css/nav.css"
@@ -56,25 +56,27 @@
     <link href="./resurse/css/iframe.css" rel="stylesheet" type="text/css" />
     <link href="./resurse/css/link_top.css" rel="stylesheet" type="text/css" />
     <link href="./resurse/css/footer.css" rel="stylesheet" type="text/css" />
-    <link href="./resurse/css/tabel.css" rel="stylesheet" type="text/css" />
+    <link href="./resurse/css/tabel.css" rel="stylesheet" type="text/css" /> -->
 
-    <!-- Font Awesome -->
+    <!-- Font Awesome
     <script
       src="https://kit.fontawesome.com/63313db439.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
-    />
+    /> -->
+
+    <%- include("../fragmente/head.ejs"); %>
   </head>
 
   <body>
-    <header>
+    <!-- <header>
       <h1>AutoTrade</h1>
     </header>
 
@@ -117,7 +119,8 @@
           </ul>
         </li>
       </ul>
-    </nav>
+    </nav>  -->
+    <%- include("../fragmente/header.ejs"); %>
 
     <main>
       <div id="grid_main">
@@ -241,36 +244,64 @@
         <div id="grid_main_area_2">
           <section id="tipuri_caroserie">
             <h2>Tipuri de caroserie</h2>
-            <table>
-              <tr>
-                <th>Tip caroserie</th>
-                <th>Numar anunturi</th>
-              </tr>
-              <tr>
-                <td>SUV</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Estate</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Sedan</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Coupe</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Cabriolet</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Hatchback</td>
-                <td>0</td>
-              </tr>
-            </table>
+
+            <div id="container_tabel">
+              <table id="tabel_main">
+                <tr>
+                  <th>Tip</th>
+                  <th>Tip caroserie</th>
+                  <th>Numar anunturi</th>
+                  <th>Pret mediu</th>
+                  <th>Pret minim</th>
+                </tr>
+                <tr>
+                  <td rowspan="4">Family</td>
+                  <td>SUV</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>Estate</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>Sedan</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>Hatchback</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Sport</td>
+                  <td>Coupe</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>Cabriolet</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tfoot>
+                  <td colspan="2" style="text-align: center;">Total</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tfoot>
+
+                <caption>Caption tabel</caption>
+              </table>
+            </div>
           </section>
         </div>
 
@@ -316,8 +347,10 @@
         </div>
         <div id="grid_main_area_6">
           <section id="date_utilizatori">
-            <h2>Date despre utilizatori si statistici</h2>
+            <h2>Date despre utilizator si statistici</h2>
             <div>
+              <p>Adresa IP: <%- locals.ip %></p>
+
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
               nibh in ipsum mattis ullamcorper sed et eros. Cras viverra
               tincidunt sem ut pulvinar. Aliquam ut vehicula erat. Interdum et
@@ -364,7 +397,7 @@
             <h2>FAQ</h2>
             <details>
               <summary>Q: Ce masini sunt expuse la reprezentanta?</summary>
-              A: <strong> de masini expuse se schimba saptamanal </strong>, dar daca doriti
+              A: <strong> Seria de masini expuse se schimba saptamanal</strong>, dar daca doriti
               sa vedeti un model anume anuntati-ne prin telefon/mail cu cel
               putin o zi inainte.
             </details>
@@ -392,7 +425,7 @@
       </div>
     </main>
 
-    <footer>
+    <!-- <footer>
       <div class="link-top">
         <a href="#top" title="Mergi la inceput">
           <div>
@@ -472,6 +505,7 @@
           <time datetime="2022-02-26">Februarie 2022</time> Stefan Popa</small
         >
       </p>
-    </footer>
+    </footer> -->
+    <%- include("../fragmente/footer.ejs"); %>
   </body>
 </html>

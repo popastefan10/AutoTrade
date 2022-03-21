@@ -1,0 +1,34 @@
+table td, table th {
+  border: 1px solid black;
+}
+
+#tabel_main {
+  caption-side: bottom;
+  border-spacing: 5px;
+}
+
+#tabel_main tbody tr:nth-child(odd) {
+  background-color: pink;
+}
+
+#tabel_main tbody tr:nth-child(even) {
+  background-color: blue;
+}
+
+#tabel_main tbody tr {
+  transition: background-color 1s linear;
+}
+
+#tabel_main tbody tr:hover {
+  background-color: aqua;
+}
+
+@media screen and (max-width: 700px) {
+  #tabel_main {
+    border-spacing: 2px;
+  }
+
+  #container_tabel {
+    overflow-x: scroll;
+  }
+}
