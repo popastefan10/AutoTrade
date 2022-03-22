@@ -2,12 +2,15 @@
   --banner_height: auto;
   --banner_border_width: 2px;
   --banner_border_color: black;
+
   --watermark_width: 100px;
   --watermark_height: 2cm;
   --watermark_border_width: 2px;
   --watermark_border_color: black;
   --watermark_opacity: 0.65;
-  --heading_font_size: 2.5em; }
+
+  --heading_font_size: 2.5em;
+}
 
 #banner {
   display: none;
@@ -16,47 +19,82 @@
   width: 80%;
   margin-left: 10%;
   height: var(--banner_height);
+
   border: var(--banner_border_width) dotted var(--banner_border_color);
-  text-align: center; }
+
+  text-align: center;
+}
 
 #watermark {
   display: none;
   right: 0;
+
   width: var(--watermark_width);
   height: var(--watermark_height);
+
   border: var(--watermark_border_width) double var(--watermark_border_color);
   border-radius: 5px;
-  opacity: var(--watermark_opacity); }
-  #watermark p {
+  opacity: var(--watermark_opacity);
+
+  p {
     vertical-align: middle;
-    text-align: center; }
+    text-align: center;
+  }
+}
 
 @media print {
   #grid_main {
-    display: block; }
+    display: block;
+  }
+
   .print_display_none {
-    display: none; }
+    display: none;
+  }
+
+  // Links
   a {
     text-decoration: none;
-    color: var(--text_color); }
+    color: var(--text_color);
+  }
+
+  // Banner
   #banner {
-    display: block; }
+    display: block;
+  }
+
+  // Watermark
   #watermark {
     display: block;
-    position: fixed; }
+    position: fixed;
+  }
+
+  // Heading
   header {
-    page-break-after: always; }
-    header h1 {
+    page-break-after: always;
+
+    h1 {
       text-align: center;
       margin-top: 50%;
+
       text-decoration: underline;
-      font-size: var(--heading_font_size); }
+      font-size: var(--heading_font_size);
+    }
+  }
+
+  // Footer
   footer {
-    page-break-before: always; }
+    page-break-before: always;
+  }
+
   @page {
     :left {
       margin-left: 2.5cm;
-      margin-right: 0.5cm; }
+      margin-right: 0.5cm;
+    }
+
     :right {
       margin-left: 0.5cm;
-      margin-right: 2.5cm; } } }
+      margin-right: 2.5cm;
+    }
+  }
+}

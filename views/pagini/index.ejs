@@ -123,11 +123,19 @@
     <%- include("../fragmente/header.ejs"); %>
 
     <main>
+      <div id="banner">
+        <p>Acesta este un proiect scolar</p>
+      </div>
+
+      <div id="watermark">
+        <p>Stefan Popa</p>
+      </div>
+
       <div id="grid_main">
         <div id="grid_main_area_1">
           <section id="despre">
             <h2>Despre site</h2>
-            <div>
+            <div class="print_display_none">
               <video
                 width="500"
                 height="auto"
@@ -144,8 +152,19 @@
                   src="resurse/videoclipuri/trafic.ogv"
                   type="video/ogv"
                 />
-                <track default kind="captions" src="resurse/vtt/trafic_ro.vtt" srclang="ro" label="Romanian"/>
-                <track kind="subtitles" src="resurse/vtt/trafic_en.vtt" srclang="en" label="English"/>
+                <track
+                  default
+                  kind="captions"
+                  src="resurse/vtt/trafic_ro.vtt"
+                  srclang="ro"
+                  label="Romanian"
+                />
+                <track
+                  kind="subtitles"
+                  src="resurse/vtt/trafic_en.vtt"
+                  srclang="en"
+                  label="English"
+                />
                 Browser-ul tau nu suporta tag-ul video.
               </video>
             </div>
@@ -160,7 +179,7 @@
             </div>
 
             <div id="grid_caroserii">
-              <div id="grid_caroserii_suv">
+              <div id="grid_caroserii_suv" class="print_display_none">
                 <figure>
                   <figcaption>SUV</figcaption>
                   <img
@@ -169,7 +188,7 @@
                   />
                 </figure>
               </div>
-              <div id="grid_caroserii_estate">
+              <div id="grid_caroserii_estate" class="print_display_none">
                 <figure>
                   <figcaption>Estate</figcaption>
                   <img
@@ -179,7 +198,7 @@
                   />
                 </figure>
               </div>
-              <div id="grid_caroserii_sedan">
+              <div id="grid_caroserii_sedan" class="print_display_none">
                 <figure>
                   <figcaption>Sedan</figcaption>
                   <img
@@ -188,7 +207,7 @@
                   />
                 </figure>
               </div>
-              <div id="grid_caroserii_coupe">
+              <div id="grid_caroserii_coupe" class="print_display_none">
                 <figure>
                   <figcaption>Coupe</figcaption>
                   <img
@@ -197,7 +216,7 @@
                   />
                 </figure>
               </div>
-              <div id="grid_caroserii_cabriolet">
+              <div id="grid_caroserii_cabriolet" class="print_display_none">
                 <figure>
                   <figcaption>Cabriolet</figcaption>
                   <img
@@ -207,7 +226,7 @@
                   />
                 </figure>
               </div>
-              <div id="grid_caroserii_hatchback">
+              <div id="grid_caroserii_hatchback" class="print_display_none">
                 <figure>
                   <figcaption>Hatchback</figcaption>
                   <img
@@ -241,22 +260,26 @@
                   <a
                     href="https://www.youtube.com/embed/oVLd2TMeO7c"
                     target="display_ghiduri"
+                    class="print_display_none"
                     >Estate vs SUV</a
                   >
                   <a
                     href="https://www.youtube.com/embed/UmoGULPLPOc"
                     target="display_ghiduri"
+                    class="print_display_none"
                     >Car shapes explained</a
                   >
                   <a
                     href="https://www.youtube.com/embed/aGK7XPNFhpQ"
                     target="display_ghiduri"
+                    class="print_display_none"
                     >Reliable exotic cars</a
                   >
                 </div>
                 <iframe
                   src="https://www.youtube.com/embed/oVLd2TMeO7c"
                   name="display_ghiduri"
+                  class="print_display_none"
                 ></iframe>
               </div>
             </section>
@@ -398,7 +421,7 @@
           </section>
         </div>
 
-        <div id="grid_main_area_8">
+        <div id="grid_main_area_8" class="print_display_none">
           <section id="anunturi_noi">
             <h2>Anunturi noi</h2>
             <picture>
