@@ -1,0 +1,50 @@
+:root {
+  --tr_odd_child_color: var(--light-blue2);
+  --tr_even_child_color: var(--light-blue4);
+  --tfoot_color: var(--tr_even_child_color);
+  --tr_hover_color: var(--light-blue5);
+
+  --tr_hover_color_change_transition_duration: var(--standard_transition_duration);
+}
+
+#tabel_main {
+  caption-side: bottom;
+  border-spacing: 5px;
+
+  th, td {
+    border: 1px solid black;
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background-color: var(--tr_odd_child_color);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--tr_even_child_color);
+    }
+  }
+
+  tfoot {
+    background-color: var(--tfoot_color);
+  }
+
+  // hover color change transition
+  tbody tr, tfoot {
+    transition: background-color var(--tr_hover_color_change_transition_duration) linear;
+  }
+
+  tbody tr:hover, tfoot:hover {
+    background-color: var(--tr_hover_color);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #tabel_main {
+    border-spacing: 2px;
+  }
+
+  #container_tabel {
+    overflow-x: scroll;
+  }
+}

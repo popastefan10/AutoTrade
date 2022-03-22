@@ -4,11 +4,11 @@
   --nav_text_color: white;
   --menu_btn_hover_color: var(--blue1);
   --menu_btn_width: 130px;
-  --menu_btn_bkg_color_transition_duration: 0.5s;
+  --menu_btn_bkg_color_transition_duration: var(--standard_transition_duration);
   --menu_link_shadow_y_offset: calc(-2 / 3 * var(--nav_height));
-  --menu_link_shadow_transition_duration: 0.5s;
+  --menu_link_shadow_transition_duration: var(--standard_transition_duration);
   --submenu_dropdown_animation_duration: 1s;
-  --submenu_underline_animation_duration: 0.5s; }
+  --submenu_underline_animation_duration: var(--standard_transition_duration); }
 
 nav {
   height: var(--nav_height);

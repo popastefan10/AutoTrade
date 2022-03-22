@@ -1,0 +1,9 @@
+:root {
+  --tracks_bkg_color: white;
+  --tracks_color: var(--text_color);
+}
+
+video::cue {
+  background-color: var(--tracks_bkg_color);
+  color: var(--tracks_color);
+}

@@ -128,6 +128,28 @@
           <section id="despre">
             <h2>Despre site</h2>
             <div>
+              <video
+                width="500"
+                height="auto"
+                poster="resurse/imagini/trafic_frame_1.jpg"
+                preload="metadata"
+                autoplay
+                controls
+              >
+                <source
+                  src="resurse/videoclipuri/trafic.mp4"
+                  type="video/mp4"
+                />
+                <source
+                  src="resurse/videoclipuri/trafic.ogv"
+                  type="video/ogv"
+                />
+                <track default kind="captions" src="resurse/vtt/trafic_ro.vtt" srclang="ro" label="Romanian"/>
+                <track kind="subtitles" src="resurse/vtt/trafic_en.vtt" srclang="en" label="English"/>
+                Browser-ul tau nu suporta tag-ul video.
+              </video>
+            </div>
+            <div>
               Ce vei vedea pe acest site: <b>anunturi cu masini de vanzare</b>.
               Multitudinea de filtre iti va permite sa te concentrezi pe
               produsele care corespund cu dorintele tale, sa sortezi dupa
@@ -293,13 +315,15 @@
                   <td>0</td>
                 </tr>
                 <tfoot>
-                  <td colspan="2" style="text-align: center;">Total</td>
+                  <td colspan="2" style="text-align: center">Total</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
                 </tfoot>
 
-                <caption>Caption tabel</caption>
+                <caption>
+                  Caption tabel
+                </caption>
               </table>
             </div>
           </section>
@@ -397,9 +421,9 @@
             <h2>FAQ</h2>
             <details>
               <summary>Q: Ce masini sunt expuse la reprezentanta?</summary>
-              A: <strong> Seria de masini expuse se schimba saptamanal</strong>, dar daca doriti
-              sa vedeti un model anume anuntati-ne prin telefon/mail cu cel
-              putin o zi inainte.
+              A: <strong> Seria de masini expuse se schimba saptamanal</strong>,
+              dar daca doriti sa vedeti un model anume anuntati-ne prin
+              telefon/mail cu cel putin o zi inainte.
             </details>
             <details>
               <summary>

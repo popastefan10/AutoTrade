@@ -15,7 +15,7 @@
   --iframe-link-color: var(--blue6);
 
   --iframe-link-hover-bkg-color: var(--blue5);
-  --iframe-link-hover-transition-duration: 0.5s;
+  --iframe-link-hover-transition-duration: var(--standard_transition_duration);
 }
 
 /* Containerul principal */

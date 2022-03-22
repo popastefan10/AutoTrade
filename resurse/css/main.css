@@ -1,5 +1,6 @@
 :root {
   --background_color: white;
+  --text_color: var(--blue6);
 
   --large_screen_min_width: 1024px;
   --medium_screen_min_width: 700px;
@@ -7,12 +8,14 @@
   --small-font-size: 13px;
   --medium-font-size: 14px;
   --large-font-size: 16px;
+
+  --standard_transition_duration: 0.5s;
 }
 
 body {
   margin: 0;
   background-color: var(--background_color);
-  color: #060e1b;
+  color: var(--text_color);
 
   font-family: 'Roboto', sans-serif;
 }
