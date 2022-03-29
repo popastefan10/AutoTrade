@@ -1,0 +1,167 @@
+{
+	"cale_galerie": "resurse/imagini/galerie_statica",
+	"imagini": [
+		{
+			"cale_relativa": "bmw_m2_f87.jpg",
+			"nume": "BMW M2 F87",
+			"descriere": "BMW M2 F87",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "bmw_m3_g80.jpg",
+			"nume": "BMW M3 G80",
+			"descriere": "BMW M3 G80",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "bmw_m4_convertible_f83.jpg",
+			"nume": "BMW M4 Convertible F83",
+			"descriere": "BMW M4 Convertible F83",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "ferrari_488_pista.jpg",
+			"nume": "Ferrari 488 Pista",
+			"descriere": "Ferrari 488 Pista",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "ferrari_f12_berlinetta.jpg",
+			"nume": "Ferrari F12 Berlinetta",
+			"descriere": "Ferrari F12 Berlinetta",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "ferrari_f8_tributo.jpg",
+			"nume": "Ferrari F8 Tributo",
+			"descriere": "Ferrari F8 Tributo",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "koenigsegg_one_1.jpg",
+			"nume": "Koenigsegg One:1",
+			"descriere": "Koenigsegg One:1",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "lamborghini_aventador_lp_700_4.jpg",
+			"nume": "Lamborghini Aventador LP700-4",
+			"descriere": "Lamborghini Aventador LP700-4",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "lamborghini_huracan_lp_610_4.jpg",
+			"nume": "Lamborghini Huracan LP 610-4",
+			"descriere": "Lamborghini Huracan LP 610-4",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "lamborghini_huracan_rwd.jpg",
+			"nume": "Lamborghini Huracan RWD",
+			"descriere": "Lamborghini Huracan RWD",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "mercedes_amg_gts.jpg",
+			"nume": "Mercedes AMG GTS",
+			"descriere": "Mercedes AMG GTS",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "mercedes_benz_s_class_w222.jpg",
+			"nume": "Mercedes Benz S-Class W222",
+			"descriere": "Mercedes Benz S-Class W222",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "pagani_huayra_pearl.jpg",
+			"nume": "Pagani Huayra Pearl",
+			"descriere": "Pagani Huayra Pearl",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "porsche_911_930_targa.jpg",
+			"nume": "Porsche 911 Targa (930)",
+			"descriere": "Porsche 911 Targa (930)",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "porsche_991_1_gt3.jpg",
+			"nume": "Porsche 911 GT3 (991.1)",
+			"descriere": "Porsche 911 GT3 (991.1)",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "shelby_gt_500_super_snake.jpg",
+			"nume": "Shelby GT500 Super Snake",
+			"descriere": "Shelby GT500 Super Snake",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "tesla_model_3.jpg",
+			"nume": "Tesla Model 3",
+			"descriere": "Tesla Model 3",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "volkswagen_karmann_ghia.jpg",
+			"nume": "Volkswagen Karmann Ghia",
+			"descriere": "Volkswagen Karmann Ghia",
+			"timp": "noapte"
+		},
+    {
+			"cale_relativa": "bmw_i8.jpg",
+			"nume": "BMW I8",
+			"descriere": "BMW I8",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "chevrolet_corvette_c1.jpg",
+			"nume": "Chevrolet Corvette C1",
+			"descriere": "Chevrolet Corvette C1",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "dmc_delorean.jpg",
+			"nume": "DMC DeLorean",
+			"descriere": "DMC DeLorean",
+			"timp": "dimineata"
+		},
+		{
+			"cale_relativa": "ford_mustang_gt.jpg",
+			"nume": "Ford Mustang GT",
+			"descriere": "Ford Mustang GT",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "jaguar_xk_convertible.jpg",
+			"nume": "Jaguar XK Convertible",
+			"descriere": "Jaguar XK Convertible",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "mercedes_benz_190_sl.jpg",
+			"nume": "Mercedes-Benz 190 SL",
+			"descriere": "Mercedes-Benz 190 SL",
+			"timp": "zi"
+		},
+		{
+			"cale_relativa": "mercedes_benz_s_63_amg.jpg",
+			"nume": "Mercedes-Benz S63 AMG",
+			"descriere": "Mercedes-Benz S63 AMG",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "porsche_356_b.jpg",
+			"nume": "Porsche 356B",
+			"descriere": "Porsche 356B",
+			"timp": "noapte"
+		},
+		{
+			"cale_relativa": "rolls_royce_wraith.jpg",
+			"nume": "Rolls-Royce Wraith",
+			"descriere": "Rolls-Royce Wraith",
+			"timp": "noapte"
+		}
+	]
+}
