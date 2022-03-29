@@ -283,6 +283,30 @@
                 ></iframe>
               </div>
             </section>
+
+            <section id="masini_vandute">
+              <h3>Ultimele masini vandute</h3>
+
+              <!-- <div class="galerie_statica">
+                <% for(let imagine of locals.imagini) { %>
+                <figure>
+                  <picture>
+                    <source
+                      srcset="<%- imagine.mic %>"
+                      media="(max-width: 700px)"
+                    />
+                    <source
+                      srcset="<%- imagine.mediu %>"
+                      media="(max-width: 1024px)"
+                    />
+                    <img src="<%- imagine.mare %>" alt="text alternativ" />
+                  </picture>
+                  <figcaption><%- imagine.descriere %></figcaption>
+                </figure>
+                <% } %>
+              </div> -->
+              <%- include("../fragmente/galerie_statica.ejs") %>
+            </section>
           </section>
         </div>
 
