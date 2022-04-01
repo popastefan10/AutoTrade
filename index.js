@@ -3,8 +3,23 @@ const fs = require("fs");
 const sharp = require("sharp");
 const ejs = require("ejs");
 const sass = require("sass");
+const { Client } = require("pg");
+// const client = require("pg/lib/native/client");
 
 const app = express();
+
+// Conectarea la baza de date
+client = new Client({
+  user: "postgres",
+  password: "1234",
+  database: "db_test",
+  host: "localhost",
+  port: 5432,
+});
+client.connect();
+client.query("SELECT * FROM laborator_1511", function(err, rezQuery) {
+  console.log(rezQuery);
+})
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
@@ -12,14 +27,20 @@ app.set("view engine", "ejs");
 
 // Home
 app.get(["/", "/home", "/index"], (req, res) => {
-  res.render("pagini/index", { ip: req.ip, imagini: obImagini.imagini, abc: 7 });
+  res.render("pagini/index", {
+    ip: req.ip,
+    imagini: obImagini.imagini,
+    abc: 7,
+  });
   console.log("GET Request at '/'");
 });
 
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
   // Obtin codul sass
-  var sirScss = fs.readFileSync(__dirname + "/resurse/sass/galerie_statica.scss").toString("utf8");
+  var sirScss = fs
+    .readFileSync(__dirname + "/resurse/sass/galerie_statica.scss")
+    .toString("utf8");
   var nrImagini = obImagini.imagini.length;
 
   // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
@@ -29,7 +50,7 @@ app.get("*/galerie_statica.css", (req, res) => {
 
   try {
     // Compilez codul sass din temp
-    rezCompilare = sass.compile(caleScss, {sourceMap: true});
+    rezCompilare = sass.compile(caleScss, { sourceMap: true });
 
     // Scriu codul css intr-un fisier in temp
     var caleCss = __dirname + "/temp/galerie_statica.css";
@@ -38,8 +59,7 @@ app.get("*/galerie_statica.css", (req, res) => {
     // Send response
     res.setHeader("Content-Type", "text/css");
     res.sendFile(caleCss);
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
     res.send("Eroare :(");
   }
@@ -89,13 +109,12 @@ function creeazaImagini() {
   d = new Date();
   ora = d.getHours();
   var moment;
-  if(ora >= 5 && ora < 12)
-    moment = "dimineata";
-  else if(ora >= 12 && ora < 20)
-    moment = "zi";
-  else
-    moment = "noapte";
-  obImagini.imagini = obImagini.imagini.filter(imagine => imagine.timp == moment);
+  if (ora >= 5 && ora < 12) moment = "dimineata";
+  else if (ora >= 12 && ora < 20) moment = "zi";
+  else moment = "noapte";
+  obImagini.imagini = obImagini.imagini.filter(
+    (imagine) => imagine.timp == moment
+  );
 
   // Trunchiez numarul de imagini la un numar divizibil cu 3
   var nrImagini = obImagini.imagini.length;
