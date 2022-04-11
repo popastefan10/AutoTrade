@@ -35,17 +35,21 @@ app.get(["/", "/home", "/index"], (req, res) => {
   console.log("GET Request at '/'");
 });
 
-// Galerie statica - compilare sass, ejs
-app.get("*/galerie_statica.css", (req, res) => {
+// Functia compileaza un fisier sass, resurse/sass/fisier.sass
+// mai intai cu ejs apoi cu sass si obtine in final un fisier
+// css in locatia resurse/temp/fisier.css
+// Parametri:
+//    numeFisier = numele fisierului fara extensie
+//    ejsLocals = optiunile trimise procesorului de ejs
+function compileSassWithEJS(res, numeFisier, ejsLocals) {
   // Obtin codul sass
   var sirScss = fs
-    .readFileSync(__dirname + "/resurse/sass/galerie_statica.scss")
+    .readFileSync(__dirname + `/resurse/sass/${numeFisier}.scss`)
     .toString("utf8");
-  var nrImagini = obImagini.imagini.length;
 
   // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
-  rezScss = ejs.render(sirScss, { nrImagini: nrImagini });
-  var caleScss = __dirname + "/temp/galerie_statica.scss";
+  rezScss = ejs.render(sirScss, ejsLocals);
+  var caleScss = __dirname + `/temp/${numeFisier}.scss`;
   fs.writeFileSync(caleScss, rezScss);
 
   try {
@@ -53,7 +57,7 @@ app.get("*/galerie_statica.css", (req, res) => {
     rezCompilare = sass.compile(caleScss, { sourceMap: true });
 
     // Scriu codul css intr-un fisier in temp
-    var caleCss = __dirname + "/temp/galerie_statica.css";
+    var caleCss = __dirname + `/temp/${numeFisier}.css`;
     fs.writeFileSync(caleCss, rezCompilare.css);
 
     // Send response
@@ -63,6 +67,12 @@ app.get("*/galerie_statica.css", (req, res) => {
     console.log(err);
     res.send("Eroare :(");
   }
+}
+
+// Galerie statica - compilare sass, ejs
+app.get("*/galerie_statica.css", (req, res) => {
+  var nrImagini = imaginiGalerieStatica.length;
+  compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
 });
 
 // Ultimele vanzari
@@ -75,24 +85,24 @@ app.get("/ultimele_vanzari", (req, res) => {
   if (ora >= 5 && ora < 12) moment = "dimineata";
   else if (ora >= 12 && ora < 20) moment = "zi";
   else moment = "noapte";
-  var imaginiFiltrate = obImagini.imagini.filter(
+  imaginiGalerieStatica = obImagini.imagini.filter(
     (imagine) => imagine.timp == moment
   );
 
   // Obtin imaginile pentru galeria animata
   var nrPoze = Math.floor(Math.random() * 6) + 6 // Generez un numar de poze intre 0 si 6
-  nrPoze = Math.min(nrPoze, imaginiFiltrate.length);
+  nrPoze = Math.min(nrPoze, imaginiGalerieStatica.length);
   nrPoze -= nrPoze % 2; // Numarul de poze trebuie sa fie par
   nrPoze = 7;
 
   // Aleg aleator poze
-  var imaginiGalerieAnimata = imaginiFiltrate.filter((imagine) => true);
+  imaginiGalerieAnimata = imaginiGalerieStatica.filter((imagine) => true);
   imaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
   var imaginiGalerieAnimata = imaginiGalerieAnimata.filter(
     (imagine, index) => index < nrPoze
   );
 
-  res.render("pagini/ultimele_vanzari", { imagini: imaginiFiltrate, imaginiGalerieAnimata: imaginiGalerieAnimata });
+  res.render("pagini/ultimele_vanzari", { imagini: imaginiGalerieStatica, imaginiGalerieAnimata: imaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
 });
 
