@@ -178,3 +178,9 @@ procent_total = 1 / nrimag
 procent_display ... display_time
 procent_display = display_time / total_time
 */
+
+@media screen and (max-width: 1024px) {
+	.galerie_animata {
+		display: none;
+	}
+}
