@@ -52,7 +52,7 @@
 }
 
 // Animatia
-$nrimag: 7;
+$nrimag: <%- locals.nrImagini %>;
 $animation_time: 3s; // Cat timp dureaza animatia pentru o singura poza
 $total_time: $nrimag * $animation_time; // Cat timp dureaza animatiile pentru toate pozele
 
@@ -86,22 +86,22 @@ $transformare_2: translateX(-33%) !default; // Mut stanga cu 1/3
 $transformare_3: translateX(200%) !default; // Mut dreapta cat de mult pot
 
 // Calculez timpi si procente
-$procent_total: math.percentage($animation_time / $total_time);
-$display_time: $animation_time / 6; // Cat timp va aparea nemodificata fiecare poza
-$procent_display: math.percentage($display_time / $total_time);
+$procent_total: math.percentage(math.div($animation_time, $total_time));
+$display_time: math.div($animation_time, 6); // Cat timp va aparea nemodificata fiecare poza
+$procent_display: math.percentage(math.div($display_time, $total_time));
 
 // Mutare la dreapta cu 1 / 3
-$first_move_time: $display_time + $animation_time * 2 / 6;
-$procent_first_move: math.percentage($first_move_time / $total_time);
+$first_move_time: $display_time + $animation_time * math.div(2, 6);
+$procent_first_move: math.percentage(math.div($first_move_time, $total_time));
 // Mutare la stanga cu 2 / 3
-$second_move_time: $first_move_time + $animation_time * 2 / 6;
-$procent_second_move: math.percentage($second_move_time / $total_time);
+$second_move_time: $first_move_time + $animation_time * math.div(2, 6);
+$procent_second_move: math.percentage(math.div($second_move_time, $total_time));
 // Opacitate 0 (se realizeaza la mijlocul mutarii finale inspre dreapta)
-$opacity0_time: $second_move_time + $animation_time * 1 / 12;
-$opacity0_procent: math.percentage($opacity0_time / $total_time);
+$opacity0_time: $second_move_time + $animation_time * math.div(1, 12);
+$opacity0_procent: math.percentage(math.div($opacity0_time, $total_time));
 // Mutare la dreapta finala
-$third_move_time: $second_move_time + $animation_time * 1 / 6;
-$procent_third_move: math.percentage($third_move_time / $total_time);
+$third_move_time: $second_move_time + $animation_time * math.div(1, 6);
+$procent_third_move: math.percentage(math.div($third_move_time, $total_time));
 // Delta pentru schimbari instantanee
 $delta_procent: math.pow(10, -6);
 

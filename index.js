@@ -35,72 +35,22 @@ app.get(["/", "/home", "/index"], (req, res) => {
   console.log("GET Request at '/'");
 });
 
-// Functia compileaza un fisier sass, resurse/sass/fisier.sass
-// mai intai cu ejs apoi cu sass si obtine in final un fisier
-// css in locatia resurse/temp/fisier.css
-// Parametri:
-//    numeFisier = numele fisierului fara extensie
-//    ejsLocals = optiunile trimise procesorului de ejs
-function compileSassWithEJS(res, numeFisier, ejsLocals) {
-  // Obtin codul sass
-  var sirScss = fs
-    .readFileSync(__dirname + `/resurse/sass/${numeFisier}.scss`)
-    .toString("utf8");
-
-  // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
-  rezScss = ejs.render(sirScss, ejsLocals);
-  var caleScss = __dirname + `/temp/${numeFisier}.scss`;
-  fs.writeFileSync(caleScss, rezScss);
-
-  try {
-    // Compilez codul sass din temp
-    rezCompilare = sass.compile(caleScss, { sourceMap: true });
-
-    // Scriu codul css intr-un fisier in temp
-    var caleCss = __dirname + `/temp/${numeFisier}.css`;
-    fs.writeFileSync(caleCss, rezCompilare.css);
-
-    // Send response
-    res.setHeader("Content-Type", "text/css");
-    res.sendFile(caleCss);
-  } catch (err) {
-    console.log(err);
-    res.send("Eroare :(");
-  }
-}
-
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
   var nrImagini = imaginiGalerieStatica.length;
   compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
 });
 
+// Galerie animata - compilare sass, ejs
+app.get("*/galerie_animata.css", (req, res) => {
+  var nrImagini = imaginiGalerieAnimata.length;
+  compileSassWithEJS(res, "galerie_animata", { nrImagini: nrImagini });
+})
+
 // Ultimele vanzari
 app.get("/ultimele_vanzari", (req, res) => {
-  // Filtrez imaginile dupa momentul zilei
-  d = new Date();
-  ora = d.getHours();
-
-  var moment;
-  if (ora >= 5 && ora < 12) moment = "dimineata";
-  else if (ora >= 12 && ora < 20) moment = "zi";
-  else moment = "noapte";
-  imaginiGalerieStatica = obImagini.imagini.filter(
-    (imagine) => imagine.timp == moment
-  );
-
-  // Obtin imaginile pentru galeria animata
-  var nrPoze = Math.floor(Math.random() * 6) + 6 // Generez un numar de poze intre 0 si 6
-  nrPoze = Math.min(nrPoze, imaginiGalerieStatica.length);
-  nrPoze -= nrPoze % 2; // Numarul de poze trebuie sa fie par
-  nrPoze = 7;
-
-  // Aleg aleator poze
-  imaginiGalerieAnimata = imaginiGalerieStatica.filter((imagine) => true);
-  imaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
-  var imaginiGalerieAnimata = imaginiGalerieAnimata.filter(
-    (imagine, index) => index < nrPoze
-  );
+  filtreazaGalerieStatica();
+  filtreazaGalerieAnimata();
 
   res.render("pagini/ultimele_vanzari", { imagini: imaginiGalerieStatica, imaginiGalerieAnimata: imaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
@@ -175,6 +125,74 @@ function creeazaImagini() {
   }
 }
 creeazaImagini();
+
+// Alege imaginile care se potrivesc cu ora curenta
+function filtreazaGalerieStatica() {
+  // Filtrez imaginile dupa momentul zilei
+  d = new Date();
+  ora = d.getHours();
+
+  var moment;
+  if (ora >= 5 && ora < 12) moment = "dimineata";
+  else if (ora >= 12 && ora < 20) moment = "zi";
+  else moment = "noapte";
+  imaginiGalerieStatica = obImagini.imagini.filter(
+    (imagine) => imagine.timp == moment
+  );
+}
+
+// Alege din imaginile galeriei statica un nr par aleator
+// de imagini cuprins intre 6 si 12 inclusiv
+function filtreazaGalerieAnimata() {
+  // Mai intai ma asigur ca am obtinut pozele din galeria statica
+  filtreazaGalerieStatica();
+
+  // Calculez numarul de poze din galeria animata
+  var nrPoze = Math.floor(Math.random() * 6) + 6 // Generez un numar de poze intre 0 si 6
+  nrPoze = Math.min(nrPoze, imaginiGalerieStatica.length);
+  nrPoze -= nrPoze % 2; // Numarul de poze trebuie sa fie par
+
+  // Aleg aleator un numar de poze din galeria statica
+  imaginiGalerieAnimata = imaginiGalerieStatica.filter((imagine) => true);
+  imaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
+  imaginiGalerieAnimata = imaginiGalerieAnimata.filter(
+    (imagine, index) => index < nrPoze
+  );
+}
+
+// Functia compileaza un fisier sass, resurse/sass/fisier.sass
+// mai intai cu ejs apoi cu sass si obtine in final un fisier
+// css in locatia resurse/temp/fisier.css
+// Parametri:
+//    numeFisier = numele fisierului fara extensie
+//    ejsLocals = optiunile trimise procesorului de ejs
+function compileSassWithEJS(res, numeFisier, ejsLocals) {
+  // Obtin codul sass
+  var sirScss = fs
+    .readFileSync(__dirname + `/resurse/sass/${numeFisier}.scss`)
+    .toString("utf8");
+
+  // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
+  rezScss = ejs.render(sirScss, ejsLocals);
+  var caleScss = __dirname + `/temp/${numeFisier}.scss`;
+  fs.writeFileSync(caleScss, rezScss);
+
+  try {
+    // Compilez codul sass din temp
+    rezCompilare = sass.compile(caleScss, { sourceMap: true });
+
+    // Scriu codul css intr-un fisier in temp
+    var caleCss = __dirname + `/temp/${numeFisier}.css`;
+    fs.writeFileSync(caleCss, rezCompilare.css);
+
+    // Send response
+    res.setHeader("Content-Type", "text/css");
+    res.sendFile(caleCss);
+  } catch (err) {
+    console.log(err);
+    res.send("Eroare :(");
+  }
+}
 
 // Erori
 function creeazaErori() {
