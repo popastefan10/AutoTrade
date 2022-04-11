@@ -6,8 +6,8 @@
 
 .center {
   margin: auto;
-  width: 50%;
-  padding: 10px;
+  width: var(--galerie_animata_width);
+  padding: 0px;
 }
 
 .galerie_animata {
@@ -18,6 +18,8 @@
   position: relative;
   height: var(--galerie_animata_height);
   overflow: hidden;
+  border-image: url(../imagini/border_image.jpg) 10 10;
+  border-style: solid;
 }
 .galerie_animata div figure {
   margin: 0;
@@ -25,10 +27,8 @@
   width: var(--galerie_animata_width);
   position: absolute;
   top: 0;
-  left: calc(50% - var(--galerie_animata_width) / 2 - 4px);
+  left: calc(50% - var(--galerie_animata_width) / 2);
   z-index: 0;
-  border-image: url(../imagini/border_image.jpg) 10 10;
-  border-style: solid;
 }
 .galerie_animata div figure img {
   height: 100%;
@@ -50,7 +50,7 @@
   animation-duration: 21s;
   transform-origin: center center;
 }
-.galerie_animata figure:hover {
+.galerie_animata div:hover figure {
   animation-play-state: paused;
 }
 .galerie_animata figure:nth-of-type(7) {

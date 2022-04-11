@@ -9,8 +9,8 @@
 
 .center {
 	margin: auto;
-	width: 50%;
-	padding: 10px;
+	width: var(--galerie_animata_width);
+	padding: 0px;
 }
 
 .galerie_animata {
@@ -22,6 +22,9 @@
 		height: var(--galerie_animata_height);
 		overflow: hidden;
 
+		border-image: url(../imagini/border_image.jpg) 10 10;
+		border-style: solid;
+
 		figure {
 			margin: 0;
 			height: var(--galerie_animata_height);
@@ -29,11 +32,8 @@
 
 			position: absolute;
 			top: 0;
-			left: calc(50% - var(--galerie_animata_width) / 2 - 4px);
+			left: calc(50% - var(--galerie_animata_width) / 2);
 			z-index: 0;
-
-			border-image: url(../imagini/border_image.jpg) 10 10;
-			border-style: solid;
 
 			img {
 				height: 100%;
@@ -66,7 +66,8 @@ $total_time: $nrimag * $animation_time; // Cat timp dureaza animatiile pentru to
 		transform-origin: center center;
 	}
 
-	figure:hover {
+	// Animatia se opreste cand cursorul este pozitionat pe galerie
+	div:hover figure {
 		animation-play-state: paused;
 	}
 
