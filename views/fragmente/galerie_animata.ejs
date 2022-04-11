@@ -1,0 +1,16 @@
+<div class="galerie_animata">
+	<div class="center">
+		<% for(let imagine of locals.imaginiGalerieAnimata) { %>
+			<figure>
+				<picture>
+					<source srcset="<%- imagine.mic %>" media="(max-width: 500px)" />
+					<source srcset="<%- imagine.mediu %>" media="(max-width: 1024px)" />
+					<img src="<%- imagine.mare %>" alt="<%- imagine.nume %>" title="<%- imagine.nume %>" />
+				</picture>
+				<figcaption>
+					<%- imagine.descriere %>
+				</figcaption>
+			</figure>
+		<% } %>
+	</div>
+</div>

@@ -9,17 +9,17 @@ const { Client } = require("pg");
 const app = express();
 
 // Conectarea la baza de date
-client = new Client({
-  user: "postgres",
-  password: "1234",
-  database: "db_test",
-  host: "localhost",
-  port: 5432,
-});
-client.connect();
-client.query("SELECT * FROM laborator_1511", function(err, rezQuery) {
-  console.log(rezQuery);
-})
+// client = new Client({
+//   user: "postgres",
+//   password: "1234",
+//   database: "db_test",
+//   host: "localhost",
+//   port: 5432,
+// });
+// client.connect();
+// client.query("SELECT * FROM laborator_1511", function(err, rezQuery) {
+//   console.log(rezQuery);
+// })
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
@@ -67,7 +67,32 @@ app.get("*/galerie_statica.css", (req, res) => {
 
 // Ultimele vanzari
 app.get("/ultimele_vanzari", (req, res) => {
-  res.render("pagini/ultimele_vanzari", { imagini: obImagini.imagini });
+  // Filtrez imaginile dupa momentul zilei
+  d = new Date();
+  ora = d.getHours();
+
+  var moment;
+  if (ora >= 5 && ora < 12) moment = "dimineata";
+  else if (ora >= 12 && ora < 20) moment = "zi";
+  else moment = "noapte";
+  var imaginiFiltrate = obImagini.imagini.filter(
+    (imagine) => imagine.timp == moment
+  );
+
+  // Obtin imaginile pentru galeria animata
+  var nrPoze = Math.floor(Math.random() * 6) + 6 // Generez un numar de poze intre 0 si 6
+  nrPoze = Math.min(nrPoze, imaginiFiltrate.length);
+  nrPoze -= nrPoze % 2; // Numarul de poze trebuie sa fie par
+  nrPoze = 7;
+
+  // Aleg aleator poze
+  var imaginiGalerieAnimata = imaginiFiltrate.filter((imagine) => true);
+  imaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
+  var imaginiGalerieAnimata = imaginiGalerieAnimata.filter(
+    (imagine, index) => index < nrPoze
+  );
+
+  res.render("pagini/ultimele_vanzari", { imagini: imaginiFiltrate, imaginiGalerieAnimata: imaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
 });
 
@@ -104,17 +129,6 @@ function creeazaImagini() {
     .readFileSync(__dirname + "/resurse/json/galerie.json")
     .toString("utf8");
   obImagini = JSON.parse(buf); // global
-
-  // Filtrez imaginile dupa momentul zilei
-  d = new Date();
-  ora = d.getHours();
-  var moment;
-  if (ora >= 5 && ora < 12) moment = "dimineata";
-  else if (ora >= 12 && ora < 20) moment = "zi";
-  else moment = "noapte";
-  obImagini.imagini = obImagini.imagini.filter(
-    (imagine) => imagine.timp == moment
-  );
 
   // Trunchiez numarul de imagini la un numar divizibil cu 3
   var nrImagini = obImagini.imagini.length;

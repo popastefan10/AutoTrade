@@ -8,7 +8,8 @@
   --menu_link_shadow_y_offset: calc(-2 / 3 * var(--nav_height));
   --menu_link_shadow_transition_duration: var(--standard_transition_duration);
   --submenu_dropdown_animation_duration: 1s;
-  --submenu_underline_animation_duration: var(--standard_transition_duration); }
+  --submenu_underline_animation_duration: var(--standard_transition_duration);
+}
 
 nav {
   height: var(--nav_height);
@@ -20,92 +21,120 @@ nav {
   position: sticky;
   z-index: 10;
   background-color: var(--nav_background_color);
-  color: var(--nav_text_color); }
-  nav a {
-    color: var(--nav_text_color);
-    text-decoration: none; }
-  nav ul,
-  nav li {
-    padding: 0;
-    margin: 0; }
-  nav ul.menu li {
-    list-style-type: none;
-    letter-spacing: 1px;
-    text-align: center;
-    cursor: pointer;
-    background-color: var(--nav_background_color); }
-    nav ul.menu li div,
-    nav ul.menu li a {
-      height: var(--nav_height);
-      line-height: var(--nav_height); }
-  nav ul.menu > li {
-    display: block;
-    float: left;
-    position: relative;
-    width: var(--menu_btn_width);
-    height: var(--nav_height);
-    text-align: center;
-    transition: background-color var(--menu_btn_bkg_color_transition_duration) linear; }
-    nav ul.menu > li > div > a {
-      text-shadow: 0px var(--menu_link_shadow_y_offset) white;
-      transition: text-shadow var(--menu_link_shadow_transition_duration) linear; }
-  nav ul.menu > li:hover {
-    background-color: var(--menu_btn_hover_color); }
-    nav ul.menu > li:hover > div > a {
-      text-shadow: 0px -1px 2px white; }
-    nav ul.menu > li:hover ul {
-      display: block; }
-  nav ul.menu ul {
-    display: none;
-    position: relative;
-    width: 100%;
-    z-index: 10;
-    animation-name: submenu_dropdown;
-    animation-duration: var(--submenu_dropdown_animation_duration); }
-    nav ul.menu ul li {
-      transition: background-color var(--menu_link_shadow_transition_duration) linear; }
-    nav ul.menu ul li:hover {
-      background-color: var(--menu_btn_hover_color); }
-    nav ul.menu ul a {
-      text-decoration: underline;
-      text-decoration-color: rgba(255, 255, 255, 0);
-      transition: text-decoration-color var(--submenu_underline_animation_duration) linear; }
-    nav ul.menu ul li:hover a {
-      text-decoration-color: white; }
+  color: var(--nav_text_color);
+}
+nav a {
+  color: var(--nav_text_color);
+  text-decoration: none;
+}
+nav ul,
+nav li {
+  padding: 0;
+  margin: 0;
+}
+nav ul.menu li {
+  list-style-type: none;
+  letter-spacing: 1px;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--nav_background_color);
+}
+nav ul.menu li div,
+nav ul.menu li a {
+  height: var(--nav_height);
+  line-height: var(--nav_height);
+}
+nav ul.menu > li {
+  display: block;
+  float: left;
+  position: relative;
+  width: var(--menu_btn_width);
+  height: var(--nav_height);
+  text-align: center;
+  transition: background-color var(--menu_btn_bkg_color_transition_duration) linear;
+}
+nav ul.menu > li > div > a {
+  text-shadow: 0px var(--menu_link_shadow_y_offset) white;
+  transition: text-shadow var(--menu_link_shadow_transition_duration) linear;
+}
+nav ul.menu > li:hover {
+  background-color: var(--menu_btn_hover_color);
+}
+nav ul.menu > li:hover > div > a {
+  text-shadow: 0px -1px 2px white;
+}
+nav ul.menu > li:hover ul {
+  display: block;
+}
+nav ul.menu ul {
+  display: none;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  animation-name: submenu_dropdown;
+  animation-duration: var(--submenu_dropdown_animation_duration);
+}
+nav ul.menu ul li {
+  transition: background-color var(--menu_link_shadow_transition_duration) linear;
+}
+nav ul.menu ul li:hover {
+  background-color: var(--menu_btn_hover_color);
+}
+nav ul.menu ul a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0);
+  transition: text-decoration-color var(--submenu_underline_animation_duration) linear;
+}
+nav ul.menu ul li:hover a {
+  text-decoration-color: rgb(255, 255, 255);
+}
 
 @keyframes submenu_dropdown {
   0% {
     transform-origin: top;
-    transform: scaleY(0); }
+    transform: scaleY(0);
+  }
   100% {
     transform-origin: top;
-    transform: scaleY(1); } }
-
+    transform: scaleY(1);
+  }
+}
 /* Hamburger menu */
 #hamburger,
 #ch-menu {
-  display: none; }
+  display: none;
+}
 
 /* Large screen */
 @media screen and (min-width: 1024px) {
   /* Ascund butonul pentru meniu mediu */
   nav ul.menu > li:nth-child(1) > div:nth-child(2) {
-    display: none; } }
-
+    display: none;
+  }
+}
 /* Medium screen */
 @media screen and (min-width: 700px) and (max-width: 1024px) {
   /* Ascund butonul pentru meniu mare */
   nav ul.menu > li:nth-child(1) > div:nth-child(1) {
-    display: none; }
+    display: none;
+  }
+
   /* Pun pe ecran butonul pentru meniu mediu */
   nav ul.menu > li:nth-child(1) > div:nth-child(2) {
-    display: block; } }
-
+    display: block;
+  }
+}
 /* Small screen */
 @media screen and (max-width: 700px) {
   /* Ascund butonul pentru meniu mare */
   nav ul.menu > li:nth-child(1) > div:nth-child(1) {
-    display: none; }
+    display: none;
+  }
+
   /* Pun pe ecran butonul pentru meniu mediu */
   nav ul.menu > li:nth-child(1) > div:nth-child(2) {
-    display: block; } }
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=nav.css.map */
