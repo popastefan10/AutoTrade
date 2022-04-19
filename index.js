@@ -4,22 +4,18 @@ const sharp = require("sharp");
 const ejs = require("ejs");
 const sass = require("sass");
 const { Client } = require("pg");
-// const client = require("pg/lib/native/client");
 
 const app = express();
 
 // Conectarea la baza de date
-// client = new Client({
-//   user: "postgres",
-//   password: "1234",
-//   database: "db_test",
-//   host: "localhost",
-//   port: 5432,
-// });
-// client.connect();
-// client.query("SELECT * FROM laborator_1511", function(err, rezQuery) {
-//   console.log(rezQuery);
-// })
+var client = new Client({
+  user: "lab1512",
+  password: "lab1512",
+  database: "bd_1552",
+  host: "localhost",
+  port: 5432,
+});
+client.connect();
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
@@ -27,11 +23,19 @@ app.set("view engine", "ejs");
 
 // Home
 app.get(["/", "/home", "/index"], (req, res) => {
-  res.render("pagini/index", {
-    ip: req.ip,
-    imagini: obImagini.imagini,
-    abc: 7,
+
+  client.query("SELECT * FROM tabel", function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else
+      console.log(rezQuery);
+      res.render("pagini/index", {
+        ip: req.ip,
+        imagini: imaginiGalerieStatica,
+        produse: rezQuery.rows
+      });
   });
+  
   console.log("GET Request at '/'");
 });
 
@@ -140,6 +144,7 @@ function filtreazaGalerieStatica() {
     (imagine) => imagine.timp == moment
   );
 }
+filtreazaGalerieStatica();
 
 // Alege din imaginile galeriei statica un nr par aleator
 // de imagini cuprins intre 6 si 12 inclusiv
@@ -159,6 +164,7 @@ function filtreazaGalerieAnimata() {
     (imagine, index) => index < nrPoze
   );
 }
+filtreazaGalerieAnimata();
 
 // Functia compileaza un fisier sass, resurse/sass/fisier.sass
 // mai intai cu ejs apoi cu sass si obtine in final un fisier
