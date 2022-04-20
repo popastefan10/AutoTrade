@@ -28,7 +28,6 @@ app.get(["/", "/home", "/index"], (req, res) => {
     if(err)
       console.log(err);
     else
-      console.log(rezQuery);
       res.render("pagini/index", {
         ip: req.ip,
         imagini: imaginiGalerieStatica,
@@ -41,21 +40,20 @@ app.get(["/", "/home", "/index"], (req, res) => {
 
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
+  filtreazaGalerieStatica();
   var nrImagini = imaginiGalerieStatica.length;
   compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
 });
 
 // Galerie animata - compilare sass, ejs
 app.get("*/galerie_animata.css", (req, res) => {
+  filtreazaGalerieAnimata();
   var nrImagini = imaginiGalerieAnimata.length;
   compileSassWithEJS(res, "galerie_animata", { nrImagini: nrImagini });
 })
 
 // Ultimele vanzari
 app.get("/ultimele_vanzari", (req, res) => {
-  filtreazaGalerieStatica();
-  filtreazaGalerieAnimata();
-
   res.render("pagini/ultimele_vanzari", { imagini: imaginiGalerieStatica, imaginiGalerieAnimata: imaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
 });

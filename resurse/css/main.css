@@ -31,9 +31,6 @@ h2 {
   }
 
   #grid_caroserii {
-    border-image: url(../imagini/border_image.jpg) 30 / 19px;
-    border-style: solid;
-
     grid-template-columns: repeat(3, auto);
     grid-template-areas:
       "grid_caroserii_suv grid_caroserii_estate grid_caroserii_sedan"
