@@ -8,12 +8,18 @@ const { Client } = require("pg");
 const app = express();
 
 // Conectarea la baza de date
+const client_username = "pstefan";
+const client_password = "1234";
+const client_database = "AutoTrade";
+const client_host = "localhost";
+const client_port = 5432;
+
 var client = new Client({
-  user: "lab1512",
-  password: "lab1512",
-  database: "bd_1552",
-  host: "localhost",
-  port: 5432,
+  user: client_username,
+  password: client_password,
+  database: client_database,
+  host: client_host,
+  port: client_port,
 });
 client.connect();
 
@@ -24,15 +30,9 @@ app.set("view engine", "ejs");
 // Home
 app.get(["/", "/home", "/index"], (req, res) => {
 
-  client.query("SELECT * FROM tabel", function(err, rezQuery) {
-    if(err)
-      console.log(err);
-    else
-      res.render("pagini/index", {
-        ip: req.ip,
-        imagini: imaginiGalerieStatica,
-        produse: rezQuery.rows
-      });
+  res.render("pagini/index", {
+    ip: req.ip,
+    imagini: imaginiGalerieStatica
   });
   
   console.log("GET Request at '/'");
@@ -56,6 +56,20 @@ app.get("*/galerie_animata.css", (req, res) => {
 app.get("/ultimele_vanzari", (req, res) => {
   res.render("pagini/ultimele_vanzari", { imagini: imaginiGalerieStatica, imaginiGalerieAnimata: imaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
+});
+
+app.get("/produse", function(req, res) {
+  client.query("SELECT * FROM masini", function(err, rezQuery) {
+    res.render("pagini/produse", {produse: rezQuery.rows});
+  });
+  console.log("GET Request at '/produse'");
+});
+
+app.get("/produs/:id", function(req, res) {
+  client.query(`SELECT * FROM masini WHERE id = ${req.params.id}`, function(err, rezQuery) {
+    res.render("pagini/produs", {prod: rezQuery.rows[0]});
+  });
+  console.log(`GET Request at '/produs/${req.params.id}'`);
 });
 
 // Eroare custom
