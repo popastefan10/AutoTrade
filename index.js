@@ -191,7 +191,7 @@ function compileSassWithEJS(res, numeFisier, ejsLocals) {
     .toString("utf8");
 
   // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
-  rezScss = ejs.render(sirScss, ejsLocals);
+  var rezScss = ejs.render(sirScss, ejsLocals);
   var caleScss = __dirname + `/temp/${numeFisier}.scss`;
   fs.writeFileSync(caleScss, rezScss);
 

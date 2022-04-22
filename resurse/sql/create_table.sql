@@ -1,11 +1,11 @@
 DROP TYPE IF EXISTS categ_caroserie;
-DROP TYPE IF EXISTS tip_motorizare;
+DROP TYPE IF EXISTS tip_tractiune;
 
 CREATE TYPE categ_caroserie AS ENUM('SUV', 'estate', 'sedan', 'coupe', 'cabriolet','hatchback');
-CREATE TYPE tip_tractiune AS ENUM('spate', 'data', 'integrala');
+CREATE TYPE tip_tractiune AS ENUM('spate', 'fata', 'integrala');
 
 
-CREATE TABLE IF NOT EXISTS prajituri (
+CREATE TABLE IF NOT EXISTS masini (
    id serial PRIMARY KEY,
    nume VARCHAR(50) UNIQUE NOT NULL,
    descriere TEXT,
