@@ -60,8 +60,15 @@ app.get("/ultimele_vanzari", (req, res) => {
 
 // Produse
 app.get("/produse", function(req, res) {
+  var tipProdus = req.query.tip;
+  var condQuery = tipProdus ? `categorie = '${tipProdus}'` : `1 = 1`;
+  console.log(condQuery);
+
   client.query("SELECT unnest(enum_range(NULL::categ_caroserie));", function(err, rezCateg) {
-    client.query("SELECT * FROM masini", function(err, rezQuery) {
+    client.query(`SELECT * FROM masini WHERE ${condQuery}`, function(err, rezQuery) {
+      if(err)
+        console.log(err);
+
       res.render("pagini/produse", {produse: rezQuery.rows, optiuni: rezCateg.rows});
     });
   });
