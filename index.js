@@ -58,9 +58,12 @@ app.get("/ultimele_vanzari", (req, res) => {
   console.log("GET Request at '/ultimele_vanzari'");
 });
 
+// Produse
 app.get("/produse", function(req, res) {
-  client.query("SELECT * FROM masini", function(err, rezQuery) {
-    res.render("pagini/produse", {produse: rezQuery.rows});
+  client.query("SELECT unnest(enum_range(NULL::categ_caroserie));", function(err, rezCateg) {
+    client.query("SELECT * FROM masini", function(err, rezQuery) {
+      res.render("pagini/produse", {produse: rezQuery.rows, optiuni: rezCateg.rows});
+    });
   });
   console.log("GET Request at '/produse'");
 });

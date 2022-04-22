@@ -17,25 +17,94 @@
   <body>
     <%- include("../fragmente/header.ejs"); %>
 
-		<% for(let prod of locals.produse) { %>
-			<article class="produs" >
-				<h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-				<div class="info-prod">
-					<p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-					<p class="calorii">Cai putere: <span class="val-calorii"><%- prod.cai_putere%></span></p>
-					<p class="gramaj">Kilometri reali: <span class="val-gramaj"><%- prod.kilometri_reali%></span></p>
-				</div>
-				<p class="categorie">Caroserie: <span class="val-categorie"><%- prod.categorie%></span></p>
-				<figure>
-					<a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-				</figure>
-				<label class="selecteaza-cos">
-					Selectează:<br/>
-					<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-				</label>
-			</article>
-		<% }%>
+		<!-- textarea, filtreaza dupa nume -->
+		<label> Nume: <input type="text" id="inp-nume" value=""></label>
+		<!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
 
-    <%- include("../fragmente/footer.ejs"); %>
+		<!-- butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
+		<div> Putere:
+			<p>
+				<label>Economica (cai putere &lt; 300)
+					<input id="i_rad1" name="gr_rad" value="0:300" type="radio" />
+				</label>
+			</p>
+			<p>
+				<label>Sport (300 &le; cai putere &lt; 500)
+					<input id="i_rad2" name="gr_rad" value="300:500" type="radio" />
+				</label>
+			</p>
+			<p>
+				<label>Supercar (500 &le; cai putere &lt; 800)
+					<input id="i_rad3" name="gr_rad" value="500:800" type="radio" />
+				</label>
+			</p>
+			<p>
+				<label>Hypercar (800 &le; cai putere)
+					<input id="i_rad4" name="gr_rad" value="800:10000" type="radio" />
+				</label>
+			</p>
+			<p>
+				<label>Toate
+					<input id="i_rad5" checked name="gr_rad" value="toate" type="radio" />
+				</label>
+			</p>
+		</div>
+
+		<!-- range, filtreaza dupa pret -->
+		<label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="300000" step="1000"> 
+			<span id="infoRange">(0)</span>
+		</label>
+		<br />
+
+		<!-- select, filtreaza dupa tipul caroseriei -->
+		<label>Tip carosrie0:
+			<select id="inp-categorie">
+				<option id="sel-toate" selected value="toate">toate</option>
+				<% for (let opt of locals.optiuni) { %>
+					<option value="<%- opt.unnest %>">
+						<%- opt.unnest %>
+					</option>
+				<% } %>
+			</select>
+		</label>
+		
+		<p>
+			<button id="filtrare">Filtreaza</button>
+			<button id="resetare">Reseteaza</button>
+			<br />
+			<button id="sortCrescNume">Sorteaza crescator dupa nume si pret</button>
+			<button id="sortDescrescNume">Sorteaza descrescator dupa nume si pret</button>
+		</p>
+		
+		<p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+
+		<!-- Grid-ul produselor -->
+		<section id="produse">
+			<h2>Produse</h2>
+			<div class="grid-produse">
+
+				<% for(let prod of locals.produse) { %>
+					<article class="produs" >
+						<h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
+						<div class="info-prod">
+							<p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
+							<p class="cai-putere">Cai putere: <span class="val-cai-putere"><%- prod.cai_putere%></span></p>
+							<p class="kilometri">Kilometri reali: <span class="val-kilometri"><%- prod.kilometri_reali%></span></p>
+						</div>
+						<p class="categorie">Caroserie: <span class="val-categorie"><%- prod.categorie%></span></p>
+						<figure>
+							<a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+						</figure>
+						<label class="selecteaza-cos">
+							Selectează:<br/>
+							<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+						</label>
+					</article>
+				<% }%>
+				
+			</div>
+		</section>
+
+  	<%- include("../fragmente/footer.ejs"); %>
   </body>
 </html>
