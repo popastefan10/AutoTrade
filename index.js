@@ -33,6 +33,11 @@ obGlobal = {
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
+app.use("/*", function(req, res, next) {
+  res.locals.propGenerala = "yabadabadoo";
+  next();
+});
+
 app.set("view engine", "ejs");
 
 // Home
