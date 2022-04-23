@@ -33,8 +33,9 @@ obGlobal = {
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
+// Trimitem tipurile de caroserii in res.locals
 app.use("/*", function(req, res, next) {
-  res.locals.propGenerala = "yabadabadoo";
+  res.locals.tipuriCaroserii = obGlobal.tipuriCaroserii;
   next();
 });
 
@@ -73,17 +74,16 @@ app.get("/ultimele_vanzari", (req, res) => {
 
 // Produse
 app.get("/produse", function(req, res) {
+  // getTipuriCaroserii(); // ma asigur ca este actualizat
+
   var tipProdus = req.query.tip;
   var condQuery = tipProdus ? `categorie = '${tipProdus}'` : `1 = 1`;
-  console.log(condQuery);
 
-  client.query("SELECT unnest(enum_range(NULL::categ_caroserie));", function(err, rezCateg) {
-    client.query(`SELECT * FROM masini WHERE ${condQuery}`, function(err, rezQuery) {
-      if(err)
-        console.log(err);
+  client.query(`SELECT * FROM masini WHERE ${condQuery}`, function(err, rezQuery) {
+    if(err)
+      console.log(err);
 
-      res.render("pagini/produse", {produse: rezQuery.rows, optiuni: rezCateg.rows});
-    });
+    res.render("pagini/produse", {produse: rezQuery.rows, optiuni: obGlobal.tipuriCaroserii});
   });
   console.log("GET Request at '/produse'");
 });
@@ -270,6 +270,21 @@ function randeazaEroare(res, identificator, titlu, text, imagine) {
     });
   }
 }
+
+// SQL
+// Preia tipurile de caroserii din baza de date
+function getTipuriCaroserii() {
+  client.query("SELECT unnest(enum_range(NULL::categ_caroserie));", function (err, rezCateg) {
+    if (err)
+      console.log(err);
+    else {
+      obGlobal.tipuriCaroserii = [];
+      for (let tipCaroserie of rezCateg.rows)
+        obGlobal.tipuriCaroserii.push(tipCaroserie.unnest);
+    }
+  });
+}
+getTipuriCaroserii();
 
 const PORT = 8080;
 app.listen(PORT, () => {
