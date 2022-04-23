@@ -23,6 +23,14 @@ var client = new Client({
 });
 client.connect();
 
+// obiect global
+obGlobal = {
+  obErori: null,
+  obImagini: null,
+  obImaginiGalerieAnimata: null,
+  obImaginiGalerieStatica: null
+}
+
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
 app.set("view engine", "ejs");
@@ -32,7 +40,7 @@ app.get(["/", "/home", "/index"], (req, res) => {
 
   res.render("pagini/index", {
     ip: req.ip,
-    imagini: imaginiGalerieStatica
+    imagini: obGlobal.obImaginiGalerieStatica
   });
   
   console.log("GET Request at '/'");
@@ -41,20 +49,20 @@ app.get(["/", "/home", "/index"], (req, res) => {
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
   filtreazaGalerieStatica();
-  var nrImagini = imaginiGalerieStatica.length;
+  var nrImagini = obGlobal.obImaginiGalerieStatica.length;
   compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
 });
 
 // Galerie animata - compilare sass, ejs
 app.get("*/galerie_animata.css", (req, res) => {
   filtreazaGalerieAnimata();
-  var nrImagini = imaginiGalerieAnimata.length;
+  var nrImagini = obGlobal.obImaginiGalerieAnimata.length;
   compileSassWithEJS(res, "galerie_animata", { nrImagini: nrImagini });
 })
 
 // Ultimele vanzari
 app.get("/ultimele_vanzari", (req, res) => {
-  res.render("pagini/ultimele_vanzari", { imagini: imaginiGalerieStatica, imaginiGalerieAnimata: imaginiGalerieAnimata });
+  res.render("pagini/ultimele_vanzari", { imagini: obGlobal.obImaginiGalerieStatica, imaginiGalerieAnimata: obGlobal.obImaginiGalerieAnimata });
   console.log("GET Request at '/ultimele_vanzari'");
 });
 
@@ -114,24 +122,24 @@ function creeazaImagini() {
   var buf = fs
     .readFileSync(__dirname + "/resurse/json/galerie.json")
     .toString("utf8");
-  obImagini = JSON.parse(buf); // global
+  obGlobal.obImagini = JSON.parse(buf); // global
 
   // Trunchiez numarul de imagini la un numar divizibil cu 3
-  var nrImagini = obImagini.imagini.length;
+  var nrImagini = obGlobal.obImagini.imagini.length;
   nrImagini = Math.floor(nrImagini / 3) * 3;
-  obImagini.imagini = obImagini.imagini.slice(0, nrImagini);
+  obGlobal.obImagini.imagini = obGlobal.obImagini.imagini.slice(0, nrImagini);
 
   // Creez duplicate redimensionate pentru fiecare imagine
-  for (let imagine of obImagini.imagini) {
+  for (let imagine of obGlobal.obImagini.imagini) {
     let nume_imagine, extensie;
     [nume_imagine, extensie] = imagine.cale_relativa.split(".");
 
     let dim_mic = 250;
     let dim_mediu = 300;
     // obtin imaginile in dimensiune mica, medie si mare
-    imagine.mic = `${obImagini.cale_galerie}/mic/${nume_imagine}-${dim_mic}.webp`; // nume-150.webp
-    imagine.mediu = `${obImagini.cale_galerie}/mediu/${nume_imagine}-${dim_mediu}.png`; // nume-300.png
-    imagine.mare = `${obImagini.cale_galerie}/${imagine.cale_relativa}`;
+    imagine.mic = `${obGlobal.obImagini.cale_galerie}/mic/${nume_imagine}-${dim_mic}.webp`; // nume-150.webp
+    imagine.mediu = `${obGlobal.obImagini.cale_galerie}/mediu/${nume_imagine}-${dim_mediu}.png`; // nume-300.png
+    imagine.mare = `${obGlobal.obImagini.cale_galerie}/${imagine.cale_relativa}`;
 
     // daca nu exista imaginea in dimensiune mica redimensionez imaginea mare
     if (!fs.existsSync(imagine.mic)) {
@@ -162,7 +170,7 @@ function filtreazaGalerieStatica() {
   if (ora >= 5 && ora < 12) moment = "dimineata";
   else if (ora >= 12 && ora < 20) moment = "zi";
   else moment = "noapte";
-  imaginiGalerieStatica = obImagini.imagini.filter(
+  obGlobal.obImaginiGalerieStatica = obGlobal.obImagini.imagini.filter(
     (imagine) => imagine.timp == moment
   );
 }
@@ -176,13 +184,13 @@ function filtreazaGalerieAnimata() {
 
   // Calculez numarul de poze din galeria animata
   var nrPoze = Math.floor(Math.random() * 6) + 6 // Generez un numar de poze intre 0 si 6
-  nrPoze = Math.min(nrPoze, imaginiGalerieStatica.length);
+  nrPoze = Math.min(nrPoze, obGlobal.obImaginiGalerieStatica.length);
   nrPoze -= nrPoze % 2; // Numarul de poze trebuie sa fie par
 
   // Aleg aleator un numar de poze din galeria statica
-  imaginiGalerieAnimata = imaginiGalerieStatica.filter((imagine) => true);
-  imaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
-  imaginiGalerieAnimata = imaginiGalerieAnimata.filter(
+  obGlobal.obImaginiGalerieAnimata = obGlobal.obImaginiGalerieStatica.filter((imagine) => true);
+  obGlobal.obImaginiGalerieAnimata.sort((a, b) => 0.5 - Math.random()); // Shuffle
+  obGlobal.obImaginiGalerieAnimata = obGlobal.obImaginiGalerieAnimata.filter(
     (imagine, index) => index < nrPoze
   );
 }
@@ -227,12 +235,12 @@ function creeazaErori() {
   var buf = fs
     .readFileSync(__dirname + "/resurse/json/erori.json")
     .toString("utf-8");
-  obErori = JSON.parse(buf); // global
+  obGlobal.obErori = JSON.parse(buf); // global
 }
 creeazaErori();
 
 function randeazaEroare(res, identificator, titlu, text, imagine) {
-  var eroare = obErori.erori.find(function (elem) {
+  var eroare = obGlobal.obErori.erori.find(function (elem) {
     return elem.identificator == identificator;
   });
 
@@ -240,14 +248,14 @@ function randeazaEroare(res, identificator, titlu, text, imagine) {
   text = text || (eroare && eroare.text) || "Eroare - text";
   imagine =
     imagine ||
-    (eroare && obErori.cale_baza + "/" + eroare.imagine) ||
-    obErori.cale_baza + "/" + "interzis.jpg";
+    (eroare && obGlobal.obErori.cale_baza + "/" + eroare.imagine) ||
+    obGlobal.obErori.cale_baza + "/" + "interzis.jpg";
 
   if (eroare && eroare.status) {
     res.status(eroare.identificator).render("pagini/eroare_generala", {
       titlu: eroare.titlu,
       text: eroare.text,
-      imagine: obErori.cale_baza + "/" + eroare.imagine,
+      imagine: obGlobal.obErori.cale_baza + "/" + eroare.imagine,
     });
   } else {
     res.render("pagini/eroare_generala", {
