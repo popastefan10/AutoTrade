@@ -57,12 +57,12 @@
 		<br />
 
 		<!-- select, filtreaza dupa tipul caroseriei -->
-		<label>Tip carosrie0:
+		<label>Tip carosrie:
 			<select id="inp-categorie">
 				<option id="sel-toate" selected value="toate">toate</option>
-				<% for (let opt of locals.optiuni) { %>
-					<option value="<%- opt.unnest %>">
-						<%- opt.unnest %>
+				<% for (let optiune of locals.optiuni) { %>
+					<option value="<%- optiune %>">
+						<%- optiune %>
 					</option>
 				<% } %>
 			</select>
@@ -112,7 +112,7 @@
 										<th>Mașină nouă</th>
 									</tr>
 									<tr>
-										<td><span><%- prod.cai_putere%></span></td>
+										<td><span class="val-cai-putere"><%- prod.cai_putere%></span></td>
 										<td><span><%- prod.motor %></span></td>
 										<td><span><%- prod.dotari.join(", ") %></span></td>
 										<td><span><%- data_formatata %></span></td>
@@ -120,7 +120,8 @@
 									</tr>
 								</table>
 								<p class="descriere"><%- prod.descriere %></p>
-								<p class="categorie">Tipul caroseriei: <span class="val-categorie"><%- prod.categorie%></span></p>
+								<p class="categorie">Tipul caroseriei: <span class="val-categorie"><%- prod.categorie %></span></p>
+								<p class="pret">Pret: <span class="val-pret"><%- prod.pret %></span></p>
 							</div>
 							<div class="imagine-produs">
 								<figure>
