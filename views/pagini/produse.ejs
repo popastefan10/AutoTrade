@@ -85,22 +85,54 @@
 			<div class="grid-produse">
 
 				<% for(let prod of locals.produse) { %>
-					<article class="produs" >
-						<h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-						<div class="info-prod">
-							<p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-							<p class="cai-putere">Cai putere: <span class="val-cai-putere"><%- prod.cai_putere%></span></p>
-							<p class="kilometri">Kilometri reali: <span class="val-kilometri"><%- prod.kilometri_reali%></span></p>
+					<%
+						let options = {
+							weekday: "long",
+							month: "long",
+							year: "numeric"
+						};
+						let data_adaugare = prod.data_adaugare;
+						let data_formatata = 
+							data_adaugare.getDate() + "(" +
+							data_adaugare.toLocaleDateString("ro-RO", {weekday: "long"}) + ")" + "/" +
+							data_adaugare.toLocaleDateString("ro-RO", {month: "long"}) + "/" +
+							data_adaugare.toLocaleDateString("ro-RO", {year: "numeric"});
+					%> 
+
+					<section class="produs <%- prod.categorie %>" id="ent<%- prod.id %>">
+						<h3 class="nume"><a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
+						<div class="continut-produs">
+							<div class="info-produs">
+								<table>
+									<tr>
+										<th>Cai putere</th>
+										<th>Motor</th>
+										<th>Dotări</th>
+										<th>Data postării</th>
+										<th>Mașină nouă</th>
+									</tr>
+									<tr>
+										<td><span><%- prod.cai_putere%></span></td>
+										<td><span><%- prod.motor %></span></td>
+										<td><span><%- prod.dotari.join(", ") %></span></td>
+										<td><span><%- data_formatata %></span></td>
+										<td><span><%- prod.folosita ? "Nu" : "Da" %></span></td>
+									</tr>
+								</table>
+								<p class="descriere"><%- prod.descriere %></p>
+								<p class="categorie">Tipul caroseriei: <span class="val-categorie"><%- prod.categorie%></span></p>
+							</div>
+							<div class="imagine-produs">
+								<figure>
+									<a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" alt="[imagine <%- prod.nume %>]" /></a>
+								</figure>
+							</div>
 						</div>
-						<p class="categorie">Caroserie: <span class="val-categorie"><%- prod.categorie%></span></p>
-						<figure>
-							<a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-						</figure>
 						<label class="selecteaza-cos">
 							Selectează:<br/>
 							<input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
 						</label>
-					</article>
+					</section>
 				<% }%>
 				
 			</div>
