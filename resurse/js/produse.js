@@ -1,4 +1,31 @@
+// const index = require("../../index");
+
+function normalizeStringWithSpaces(stringWithSpaces) {
+	var tokens = stringWithSpaces.split(" ");
+	tokens = tokens.map(token => token.toLowerCase());
+	var normalizedString = tokens.join("_");
+	return normalizedString;
+}
+
+function getStringFromNormalized(normalizedString) {
+	var tokens = normalizedString.split("_");
+	var retString = tokens.join(" ");
+	return retString;
+}
+
 window.onload = function () {
+	// functieTest();
+
+	// ascunde filtrele
+	document.getElementById("ascunde-filtre").addEventListener('click', function() {
+		var sectiuneFiltre = document.getElementById("filtre-produse");
+
+		if (sectiuneFiltre.style.display == "none")
+			sectiuneFiltre.style.display = "block";
+		else
+			sectiuneFiltre.style.display = "none";
+	});
+
     // butonul de filtrare
     document.getElementById("filtrare").addEventListener('click', function () {
         // obtin valorile dupa care sa filtrez
@@ -26,6 +53,14 @@ window.onload = function () {
         // tip caroserie
         var tipCaroserie = document.getElementById("inp-categorie").value;
 
+		// dotari
+		var checkboxDotari = document.getElementsByName("dotari");
+		var dotariAlese = new Array();
+		for (let checkboxDotare of checkboxDotari) {
+			if (checkboxDotare.checked)
+				dotariAlese.push(checkboxDotare.value);
+		}
+
         // filtrarea produselor
         var produse = document.getElementsByClassName("produs");
         for (let produs of produse) {
@@ -43,7 +78,18 @@ window.onload = function () {
             var tipCaroserieProdus = produs.getElementsByClassName("val-categorie")[0].innerHTML;
             var condTipCaroserie = tipCaroserie == "toate" || tipCaroserieProdus == tipCaroserie;
 
-            var condFinala = condNume && condCaiPutere && condPret && condTipCaroserie;
+			var dotariProdus = produs.getElementsByClassName("val-dotari")[0].innerHTML.split(",");
+			var condDotari = false;
+			if (dotariAlese.length == 0)
+				condDotari = true;
+			else
+				for (let dotareProdus of dotariProdus) {
+					dotareProdus = dotareProdus.trim();
+					condDotari ||= dotariAlese.includes(dotareProdus);
+				}
+			// condDotari = true;
+
+            var condFinala = condNume && condCaiPutere && condPret && condTipCaroserie && condDotari;
             if (condFinala)
                 produs.style.display = "block";
         };
@@ -59,9 +105,13 @@ window.onload = function () {
         // resetez filtrele la starea initiala
         document.getElementById("inp-nume").value = "";
         document.getElementById("i_rad5").checked = true;
-        document.getElementById("inp-pret").value = 0;
-        document.getElementById("infoRange").innerHTML = "(0)";
+        document.getElementById("inp-pret").value = document.getElementById("inp-pret").defaultValue;
+        document.getElementById("infoRange").innerHTML = `(${document.getElementById("inp-pret").defaultValue})`;
         document.getElementById("sel-toate").selected = true;
+
+		var checkboxuriDotari = document.getElementsByName("dotari");
+		for (let checkboxDotare of checkboxuriDotari)
+			checkboxDotare.checked = false;
 
         // afisez toate produsele
         var produse = document.getElementsByClassName("produs");

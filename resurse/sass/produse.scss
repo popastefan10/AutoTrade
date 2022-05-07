@@ -1,23 +1,64 @@
 :root {
+  --medium-btn-size: 8em;
+
+  --ascunde-filtre-bkg-color: var(--blue5);
+  --ascunde-filtre-color: white;
+
 	--produs-border-color: var(--blue6);
 	--produs-border-size: 2px;
-	--produs-border-shadow-color: rgba(8, 18, 34, 0.3);
+	--produs-border-shadow-color: var(--blue6-transparent);
 	--produs-border-shadow-spread: 5px;
 	--produs-border-radius: 5px;
 
-	--info-border-left-color: rgba(8, 18, 34, 0.3);
+	--info-border-left-color: var(--blue6-transparent);
 	--info-padding-left: 0.6em;
 	--info-border-left: 2px solid var(--info-border-left-color);
 	--info-border-left-hover: 2px solid var(--blue6);
 }
 
+#ascunde-filtre {
+  padding: 0.5em;
+  margin: 1em;
+  width: var(--medium-btn-size);
+
+  background-color: var(--ascunde-filtre-bkg-color);
+  color: var(--ascunde-filtre-color);
+
+  cursor: pointer;
+
+  p {
+    margin: 0;
+  }
+}
+
+#filtre-produse {
+  margin: 1em;
+
+  .optiuni-filtre {
+    margin: 1em;
+    // background-color: var(--blue6-transparent);
+
+    .optiune-filtru {
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      
+      border: var(--produs-border-size) solid var(--produs-border-color);
+      border-radius: var(--produs-border-radius);
+    }
+  }
+  
+  .butoane-filtrare {
+    margin: 1em;
+  }
+}
+
 .grid-produse {
-	margin: 1rem;
+	margin: 1em;
 
 	.produs {
-		margin: 1rem;
-		margin-bottom: 3rem;
-		padding: 1rem;
+		margin: 1em;
+		margin-bottom: 3em;
+		padding: 1em;
 
 		// margini
 		border-radius: var(--produs-border-radius);
@@ -29,8 +70,8 @@
 		h3.nume {
 			text-align: center;
 			margin-top: 0;
-			padding-top: 0.5rem;
-			padding-bottom: 0.5rem;
+			padding-top: 0.5em;
+			padding-bottom: 0.5em;
 
 			a {
 				// color: #db4b12;
@@ -51,7 +92,7 @@
 
 				table {
 					td, th {
-						padding: 0.5rem;
+						padding: 0.5em;
 						border: 2px solid var(--blue6);
 						border-radius: 3px;
 					}

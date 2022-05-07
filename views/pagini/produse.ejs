@@ -17,67 +17,111 @@
   <body>
     <%- include("../fragmente/header.ejs"); %>
 
-		<!-- textarea, filtreaza dupa nume -->
-		<label> Nume: <input type="text" id="inp-nume" value=""></label>
-		<!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
+    <div id="ascunde-filtre">
+      <p>Filtre</p>
+    </div>
 
-		<!-- butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
-		<div> Putere:
-			<p>
-				<label>Economica (cai putere &lt; 300)
-					<input id="i_rad1" name="gr_rad" value="0:300" type="radio" />
-				</label>
-			</p>
-			<p>
-				<label>Sport (300 &le; cai putere &lt; 500)
-					<input id="i_rad2" name="gr_rad" value="300:500" type="radio" />
-				</label>
-			</p>
-			<p>
-				<label>Supercar (500 &le; cai putere &lt; 800)
-					<input id="i_rad3" name="gr_rad" value="500:800" type="radio" />
-				</label>
-			</p>
-			<p>
-				<label>Hypercar (800 &le; cai putere)
-					<input id="i_rad4" name="gr_rad" value="800:10000" type="radio" />
-				</label>
-			</p>
-			<p>
-				<label>Toate
-					<input id="i_rad5" checked name="gr_rad" value="toate" type="radio" />
-				</label>
-			</p>
-		</div>
+    <section id="filtre-produse">
+      <div class="optiuni-filtre">
+        <!-- input de tip text, filtreaza dupa nume -->
+        <div class="optiune-filtru">
+          <label> Nume: <input type="text" id="inp-nume" value=""></label>
+        </div>
 
-		<!-- range, filtreaza dupa pret -->
-		<label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="300000" step="1000"> 
-			<span id="infoRange">(0)</span>
-		</label>
-		<br />
+        <!-- (BD) butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
+        <div class="optiune-filtru"> Putere:
+          <% if(locals.cai_putere.min < 300) { %>
+            <p>
+              <label>Economica (cai putere &lt; 300)
+                <input id="i_rad1" name="gr_rad" value="0:300" type="radio" />
+              </label>
+            </p>
+          <% } %>
+          <% if(locals.cai_putere.min < 600 && locals.cai_putere.max >= 300) { %>
+            <p>
+              <label>Sport (300 &le; cai putere &lt; 600)
+                <input id="i_rad2" name="gr_rad" value="300:600" type="radio" />
+              </label>
+            </p>
+          <% } %>
+          <% if(locals.cai_putere.min < 900 && locals.cai_putere.max >= 600) { %>
+            <p>
+              <label>Supercar (600 &le; cai putere &lt; 900)
+                <input id="i_rad3" name="gr_rad" value="600:900" type="radio" />
+              </label>
+            </p>
+          <% } %>
+          <% if(locals.cai_putere.max >= 900) { %>
+            <p>
+              <label>Hypercar (900 &le; cai putere)
+                <input id="i_rad4" name="gr_rad" value="900:10000" type="radio" />
+              </label>
+            </p>
+          <% } %>
+          <p>
+            <label>Toate
+              <input id="i_rad5" checked name="gr_rad" value="toate" type="radio" />
+            </label>
+          </p>
+        </div>
 
-		<!-- select, filtreaza dupa tipul caroseriei -->
-		<label>Tip carosrie:
-			<select id="inp-categorie">
-				<option id="sel-toate" selected value="toate">toate</option>
-				<% for (let optiune of locals.optiuni) { %>
-					<option value="<%- optiune %>">
-						<%- optiune %>
-					</option>
-				<% } %>
-			</select>
-		</label>
-		
-		<!-- butoane de filtrare -->
-		<p>
-			<button id="filtrare">Filtreaza</button>
-			<button id="resetare">Reseteaza</button>
-			<br />
-			<button id="sortCrescNume">Sorteaza crescator dupa nume si pret</button>
-			<button id="sortDescrescNume">Sorteaza descrescator dupa nume si pret</button>
-		</p>
-		
-		<p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+        <!-- (BD) range, filtreaza dupa pret -->
+        <div class="optiune-filtru">
+          <label> Pret minim: <input type="range" id="inp-pret" value="<%- locals.pret.min %>" min="0" max="<%- locals.pret.max %>" step="1000"> 
+            <span id="infoRange">(<%- locals.pret.min %>)</span>
+          </label>
+        </div>
+
+        <!-- (BD) select, filtreaza dupa tipul caroseriei -->
+        <div class="optiune-filtru">
+          <label>Tip caroserie:
+            <select id="inp-categorie">
+              <option id="sel-toate" selected value="toate">toate</option>
+              <% for (let optiune of locals.optiuni) { %>
+                <option value="<%- optiune %>">
+                  <%- optiune %>
+                </option>
+              <% } %>
+            </select>
+          </label>
+        </div>
+
+        <!-- (BD) checkbox, filtreaza dupa dotari -->
+        <div class="optiune-filtru">
+          <span>Dotari:</span>
+          <% var dotariSortate = Array.from(locals.dotari.toate).sort() %>
+          <% for (let dotare of dotariSortate) { %>
+            <div>
+              <input type="checkbox" name="dotari" id="<%- dotare %>" value="<%- dotare %>">
+              <label for="<%- dotare %>"><%- dotare %></label>
+            </div>
+          <% } %>
+
+          <!-- <div>
+            <input type="checkbox" name="dotari" id="seat_heating" value="seat_heating">
+            <label for="seat_heating">Seat heating</label>
+          </div>
+
+          <div>
+            <input type="checkbox" name="dotari" id="cruise_control" value="cruise_control">
+            <label for="cruise_control">Cruise control</label>
+          </div> -->
+        </div>
+      </div>
+      
+      <div class="butoane-filtrare">
+        <!-- butoane de filtrare -->
+        <p>
+          <button id="filtrare">Filtreaza</button>
+          <button id="resetare">Reseteaza</button>
+          <br />
+          <button id="sortCrescNume">Sorteaza crescator dupa nume si pret</button>
+          <button id="sortDescrescNume">Sorteaza descrescator dupa nume si pret</button>
+        </p>
+        
+        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+      </div>
+    </section>
 
 		<!-- Grid-ul produselor -->
 		<section id="produse">
@@ -114,7 +158,7 @@
 									<tr>
 										<td><span class="val-cai-putere"><%- prod.cai_putere%></span></td>
 										<td><span><%- prod.motor %></span></td>
-										<td><span><%- prod.dotari.join(", ") %></span></td>
+										<td><span class="val-dotari"><%- prod.dotari.join(", ") %></span></td>
 										<td><span><%- data_formatata %></span></td>
 										<td><span><%- prod.folosita ? "Nu" : "Da" %></span></td>
 									</tr>

@@ -74,7 +74,7 @@ app.get("/ultimele_vanzari", (req, res) => {
 
 // Produse
 app.get("/produse", function(req, res) {
-  // getTipuriCaroserii(); // ma asigur ca este actualizat
+  getInfoFromDB();
 
   var tipProdus = req.query.tip;
   var condQuery = tipProdus ? `categorie = '${tipProdus}'` : `1 = 1`;
@@ -83,7 +83,13 @@ app.get("/produse", function(req, res) {
     if(err)
       console.log(err);
 
-    res.render("pagini/produse", {produse: rezQuery.rows, optiuni: obGlobal.tipuriCaroserii});
+    res.render("pagini/produse", {
+      produse: rezQuery.rows,
+      optiuni: obGlobal.tipuriCaroserii,
+      cai_putere: obGlobal.cai_putere,
+      pret: obGlobal.pret,
+      dotari: obGlobal.dotari
+    });
   });
   console.log("GET Request at '/produse'");
 });
@@ -271,9 +277,21 @@ function randeazaEroare(res, identificator, titlu, text, imagine) {
   }
 }
 
-// SQL
+// SQL ///////////////////////////////////////////
+
+// Preia toate informatiile importante din baza de date:
+//    tipurile de caroserii,
+//    
+function getInfoFromDB() {
+  getTipuriCaroseriiFromDB();
+  getCaiPutereFromDB();
+  getPretFromDB();
+  getDotariFromDB();
+}
+getInfoFromDB();
+
 // Preia tipurile de caroserii din baza de date
-function getTipuriCaroserii() {
+function getTipuriCaroseriiFromDB() {
   client.query("SELECT unnest(enum_range(NULL::categ_caroserie));", function (err, rezCateg) {
     if (err)
       console.log(err);
@@ -284,9 +302,74 @@ function getTipuriCaroserii() {
     }
   });
 }
-getTipuriCaroserii();
+
+// Preia maximul si minimul de cai putere
+function getCaiPutereFromDB() {
+  obGlobal.cai_putere = new Object();
+
+  var max_cai_putere_query = "SELECT MAX(cai_putere) FROM masini;";
+  client.query(max_cai_putere_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else
+      obGlobal.cai_putere.max = rezQuery.rows[0].max;
+  });
+
+  var min_cai_putere_query = "SELECT MIN(cai_putere) FROM masini;";
+  client.query(min_cai_putere_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else
+      obGlobal.cai_putere.min = rezQuery.rows[0].min;
+  });
+}
+
+// Preia pretul minim si maxim
+function getPretFromDB () {
+  obGlobal.pret = new Object();
+
+  var max_pret_query = "SELECT MAX(pret) FROM masini;";
+  client.query(max_pret_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else
+      obGlobal.pret.max = rezQuery.rows[0].max;
+  });
+
+  var min_pret_query = "SELECT MIN(pret) FROM masini;";
+  client.query(min_pret_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else
+      obGlobal.pret.min = rezQuery.rows[0].min;
+  });
+}
+
+// Preia dotarile sub forma unui set de string-uri nenormalizate
+function getDotariFromDB() {
+  obGlobal.dotari = new Object();
+
+  var dotari_query = "SELECT dotari FROM masini;";
+  client.query(dotari_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else {
+      var perechi_dotari = rezQuery.rows;
+      obGlobal.dotari.toate = new Set();
+      for (let pereche_dotari of perechi_dotari)
+        for (let dotare of pereche_dotari.dotari)
+          obGlobal.dotari.toate.add(dotare);
+    }
+  });
+}
 
 const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+function functieTest() {
+  console.log("yabadabadoooo");
+}
+
+module.exports.functieTest = functieTest;
