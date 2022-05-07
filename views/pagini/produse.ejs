@@ -18,7 +18,7 @@
     <%- include("../fragmente/header.ejs"); %>
 
     <div id="ascunde-filtre">
-      <p>Filtre</p>
+      <button>Filtre</button>
     </div>
 
     <section id="filtre-produse">
@@ -88,24 +88,24 @@
 
         <!-- (BD) checkbox, filtreaza dupa dotari -->
         <div class="optiune-filtru">
-          <span>Dotari:</span>
+          <span>Dotări:</span>
           <% var dotariSortate = Array.from(locals.dotari.toate).sort() %>
           <% for (let dotare of dotariSortate) { %>
-            <div>
+            <div class="container-dotare">
               <input type="checkbox" name="dotari" id="<%- dotare %>" value="<%- dotare %>">
               <label for="<%- dotare %>"><%- dotare %></label>
             </div>
           <% } %>
 
-          <!-- <div>
-            <input type="checkbox" name="dotari" id="seat_heating" value="seat_heating">
-            <label for="seat_heating">Seat heating</label>
+          <div id="ascunde-dotari">
+            <button>&plus; Mai multe...</button>
           </div>
+        </div>
 
-          <div>
-            <input type="checkbox" name="dotari" id="cruise_control" value="cruise_control">
-            <label for="cruise_control">Cruise control</label>
-          </div> -->
+        <!-- textarea, filtreaza dupa descrieri -->
+        <div class="optiune-filtru" id="container-cuv-cheie">
+          <p>Cuvinte cheie:</p>
+          <textarea id="textarea-cuv-cheie" name="textarea-cuv-cheie"></textarea>
         </div>
       </div>
       
@@ -114,7 +114,6 @@
         <p>
           <button id="filtrare">Filtreaza</button>
           <button id="resetare">Reseteaza</button>
-          <br />
           <button id="sortCrescNume">Sorteaza crescator dupa nume si pret</button>
           <button id="sortDescrescNume">Sorteaza descrescator dupa nume si pret</button>
         </p>

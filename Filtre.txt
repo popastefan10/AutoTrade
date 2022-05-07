@@ -1,0 +1,9 @@
+input de tip text (am deja, filtreaza numele)
+input de tip range (am deja, filtreaza pretul minim)
+inputuri radio (am deja, filtreaza cai putere)
+select simplu (am deja, filtreaza caroseria)
+inputuri checkbox (am, trebuie sa filtreze dotarile)
+
+textarea (NU am, trebuie sa filtreze descrierea)
+select multiplu (Nu am, nu stiu inca ce trebuie sa filtreze)
+datalist

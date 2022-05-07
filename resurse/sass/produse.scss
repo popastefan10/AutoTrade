@@ -16,13 +16,32 @@
 	--info-border-left-hover: 2px solid var(--blue6);
 }
 
-#ascunde-filtre {
+button {
   padding: 0.5em;
   margin: 1em;
   width: var(--medium-btn-size);
 
   background-color: var(--ascunde-filtre-bkg-color);
   color: var(--ascunde-filtre-color);
+  border: none;
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition: text-shadow var(--fast_transition_duration) linear;
+}
+
+button:hover {
+  text-shadow: 0px 0px 2px white;
+}
+
+#ascunde-filtre {
+  // padding: 0.5em;
+  // margin: 1em;
+  // width: var(--medium-btn-size);
+
+  // background-color: var(--ascunde-filtre-bkg-color);
+  // color: var(--ascunde-filtre-color);
 
   cursor: pointer;
 
@@ -46,9 +65,32 @@
       border-radius: var(--produs-border-radius);
     }
   }
+
+  #container-cuv-cheie {
+    p {
+      margin: 0;
+    }
+  }
   
   .butoane-filtrare {
     margin: 1em;
+  }
+
+  #ascunde-dotari {
+    button {
+      padding-left: 0;
+      padding-top: 0;
+
+      background-color: white;
+      color: var(--blue2);
+      
+      text-decoration: underline;
+      text-align: left;
+    }
+
+    button:hover {
+      text-shadow: 0px 0px 2px #22a1e620;
+    }
   }
 }
 

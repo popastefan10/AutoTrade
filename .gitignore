@@ -2,3 +2,5 @@ node_modules
 
 # Folder cu sass compilat cu ejs
 temp
+
+*.vscode/
