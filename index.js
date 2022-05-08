@@ -86,6 +86,7 @@ app.get("/produse", function(req, res) {
     res.render("pagini/produse", {
       produse: rezQuery.rows,
       optiuni: obGlobal.tipuriCaroserii,
+      producatori: obGlobal.producatori,
       cai_putere: obGlobal.cai_putere,
       pret: obGlobal.pret,
       dotari: obGlobal.dotari
@@ -284,6 +285,7 @@ function randeazaEroare(res, identificator, titlu, text, imagine) {
 //    
 function getInfoFromDB() {
   getTipuriCaroseriiFromDB();
+  getProducatoriFromDB();
   getCaiPutereFromDB();
   getPretFromDB();
   getDotariFromDB();
@@ -301,6 +303,23 @@ function getTipuriCaroseriiFromDB() {
         obGlobal.tipuriCaroserii.push(tipCaroserie.unnest);
     }
   });
+}
+
+// Preia toti producatorii din baza de date
+function getProducatoriFromDB() {
+  obGlobal.producatori = new Object();
+
+  var producatori_query = "SELECT DISTINCT producator FROM masini ORDER BY producator;";
+  client.query(producatori_query, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else {
+      var producatori = new Array();
+      for (let producator of rezQuery.rows)
+        producatori.push(producator.producator);
+      obGlobal.producatori.toti = producatori;
+    }
+  })
 }
 
 // Preia maximul si minimul de cai putere
@@ -367,9 +386,3 @@ const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-function functieTest() {
-  console.log("yabadabadoooo");
-}
-
-module.exports.functieTest = functieTest;

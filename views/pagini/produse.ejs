@@ -25,8 +25,22 @@
       <div class="optiuni-filtre">
         <!-- input de tip text, filtreaza dupa nume -->
         <div class="optiune-filtru">
-          <label> Nume: <input type="text" id="inp-nume" value=""></label>
+          <label for="inp-nume">Nume:</label>
+					<br />
+					<input type="text" id="inp-nume" value="">
         </div>
+
+				<!-- (BD) datalist, filtreaza dupa producator -->
+				<div class="optiune-filtru">
+					<label for="input-producatori">Producator:</label>
+					<br />
+					<input list="datalist-producator" id="input-producator" name="input-producator">
+					<datalist id="datalist-producator">
+						<% for (let producator of locals.producatori.toti) { %>
+							<option value="<%- producator %>">
+						<% } %>
+					</datalist>
+				</div>
 
         <!-- (BD) butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
         <div class="optiune-filtru"> Putere:
@@ -148,6 +162,7 @@
 							<div class="info-produs">
 								<table>
 									<tr>
+										<th style="display: none;">Producator</th>
 										<th>Cai putere</th>
 										<th>Motor</th>
 										<th>Dotări</th>
@@ -155,6 +170,7 @@
 										<th>Mașină nouă</th>
 									</tr>
 									<tr>
+										<td style="display: none;"><span class="val-producator"><%- prod.producator %></span></td>
 										<td><span class="val-cai-putere"><%- prod.cai_putere%></span></td>
 										<td><span><%- prod.motor %></span></td>
 										<td><span class="val-dotari"><%- prod.dotari.join(", ") %></span></td>

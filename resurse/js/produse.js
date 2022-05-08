@@ -61,6 +61,9 @@ window.onload = function () {
 		// nume
 		var valNume = document.getElementById("inp-nume").value.toLowerCase();
 
+		// producator
+		var valProducator = document.getElementById("input-producator").value;
+
 		// interval cai putere
 		var butoaneRadio = document.getElementsByName("gr_rad");
 		for (let butonRadio of butoaneRadio)
@@ -102,6 +105,9 @@ window.onload = function () {
 			var numeProdus = produs.getElementsByClassName("val-nume")[0].innerHTML.toLowerCase();
 			var condNume = numeProdus.includes(valNume);
 
+			var producatorProdus = produs.getElementsByClassName("val-producator")[0].innerHTML;
+			var condProducator = valProducator == "" || producatorProdus == valProducator;
+
 			var caiPutereProdus = parseInt(produs.getElementsByClassName("val-cai-putere")[0].innerHTML);
 			var condCaiPutere = caiPutereProdus >= minCaiPutere && caiPutereProdus < maxCaiPutere;
 
@@ -128,6 +134,7 @@ window.onload = function () {
 
 			var condFinala =
 				condNume &&
+				condProducator &&
 				condCaiPutere &&
 				condPret &&
 				condTipCaroserie &&
@@ -147,6 +154,7 @@ window.onload = function () {
 	document.getElementById("resetare").addEventListener("click", function() {
 		// resetez filtrele la starea initiala
 		document.getElementById("inp-nume").value = "";
+		document.getElementById("input-producator").value = "";
 		document.getElementById("i_rad5").checked = true;
 		document.getElementById("inp-pret").value = document.getElementById("inp-pret").defaultValue;
 		document.getElementById("infoRange").innerHTML = `(${document.getElementById("inp-pret").defaultValue})`;
