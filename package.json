@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,8 @@
     "pg-native": "^3.0.0",
     "sass": "^1.49.9",
     "sharp": "^0.30.3"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

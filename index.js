@@ -403,7 +403,7 @@ function getDotariFromDB() {
   });
 }
 
-const PORT = 8080;
-app.listen(PORT, () => {
+var s_port = process.env.PORT || 5000;
+app.listen(s_port, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
