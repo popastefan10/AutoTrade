@@ -41,8 +41,13 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  // Ecran mic
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+
   // Ecran mediu
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1024px) and (min-width: 500px) {
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
 
@@ -67,10 +72,5 @@
         grid-area: list.slash($linie_sus + 1, 2, $linie_sus + 2, 4);
       }
     }
-  }
-
-  // Ecran mic
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 1fr;
   }
 }
