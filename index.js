@@ -73,6 +73,8 @@ app.get(["/", "/home", "/index"], (req, res) => {
 
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
+  console.log("Request at \"*/galerie_statica.css\"");
+
   filtreazaGalerieStatica();
   var nrImagini = obGlobal.obImaginiGalerieStatica.length;
   compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
@@ -235,6 +237,8 @@ filtreazaGalerieAnimata();
 //    numeFisier = numele fisierului fara extensie
 //    ejsLocals = optiunile trimise procesorului de ejs
 function compileSassWithEJS(res, numeFisier, ejsLocals) {
+  console.log("Ineputul functiei compileSassWithEJS");
+
   // Obtin codul sass
   var sirScss = fs
     .readFileSync(__dirname + `/resurse/sass/${numeFisier}.scss`)
@@ -255,6 +259,7 @@ function compileSassWithEJS(res, numeFisier, ejsLocals) {
 
     // Send response
     res.setHeader("Content-Type", "text/css");
+    console.log("Inainte de a trimite fisierul CSS");
     res.sendFile(caleCss);
   } catch (err) {
     console.log(err);
