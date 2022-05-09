@@ -17,8 +17,8 @@
   <body>
     <%- include("../fragmente/header.ejs"); %>
 
-    <div id="ascunde-filtre">
-      <button>Filtre</button>
+    <div id="container-ascunde-filtre">
+      <button id="btn-ascunde-filtre">Filtre</button>
     </div>
 
     <section id="filtre-produse">
@@ -32,7 +32,7 @@
 
 				<!-- (BD) datalist, filtreaza dupa producator -->
 				<div class="optiune-filtru">
-					<label for="input-producatori">Producator:</label>
+					<label for="input-producatori">Producător:</label>
 					<br />
 					<input list="datalist-producator" id="input-producator" name="input-producator">
 					<datalist id="datalist-producator">
@@ -44,7 +44,7 @@
 
 				<!-- (BD) select multiplu, filtreaza dupa tipul de motor -->
 				<div class="optiune-filtru">
-					<label>Tipul de motor:</label>
+					<label>Tipul de motor (tineți apasată tasta <i>Ctrl</i> pentru a selecta mai multe):</label>
 					<br />
 					<select id="select-tip-motor" name="select-tip-motor" multiple size="6">
 						<% for (let tipMotor of locals.tipuriDeMotoare.toate) { %>
@@ -58,7 +58,7 @@
 					<label>Putere:</label>
           <% if(locals.cai_putere.min < 300) { %>
             <p>
-              <label>Economica (cai putere &lt; 300)
+              <label>Economică (cai putere &lt; 300)
                 <input id="i_rad1" name="gr_rad" value="0:300" type="radio" />
               </label>
             </p>
@@ -93,10 +93,11 @@
 
         <!-- (BD) range, filtreaza dupa pret -->
         <div class="optiune-filtru">
-          <label>Pret minim:</label>
+          <label>Preț minim: <span id="infoRange"><%- locals.pret.min %></span></label>
 					<br />
+					<span id="pretRangeMin">(0)</span>
 					<input type="range" id="inp-pret" value="<%- locals.pret.min %>" min="0" max="<%- locals.pret.max %>" step="1000"> 
-          <span id="infoRange">(<%- locals.pret.min %>)</span>
+					<span id="pretRangeMax">(<%- locals.pret.max %>)</span>
         </div>
 
         <!-- (BD) select, filtreaza dupa tipul caroseriei -->
@@ -141,13 +142,17 @@
       <div class="butoane-filtrare">
         <!-- butoane de filtrare -->
         <p>
-          <button id="filtrare">Filtreaza</button>
-          <button id="resetare">Reseteaza</button>
-          <button id="sortCrescNume">Sorteaza crescator dupa nume si pret</button>
-          <button id="sortDescrescNume">Sorteaza descrescator dupa nume si pret</button>
+          <button id="filtrare">Filtrează</button>
+          <button id="resetare">Resetează</button>
+          <button id="sortCrescPretNrDotari">Sortează crescător după preț și numărul de dotări</button>
+          <button id="sortDescrescPretNrDotari">Sortează descrescător după preț și numărul de dotări</button>
+					<button id="calcPretMediu">Calculează media prețurilor mașinilor selectate</button>
+					<div id="container-pret-mediu" style="display: none;">
+						<p>Prețul mediu pentru produsele afișate este <span class="val-pret-mediu"></span></p>
+					</div>
         </p>
         
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+        <!-- <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p> -->
       </div>
     </section>
 

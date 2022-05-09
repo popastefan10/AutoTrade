@@ -1,5 +1,6 @@
 :root {
   --medium-btn-size: 8em;
+	--large-btn-size: 16em;
 
   --ascunde-filtre-bkg-color: var(--blue5);
   --ascunde-filtre-color: white;
@@ -74,6 +75,21 @@ button:hover {
   
   .butoane-filtrare {
     margin: 1em;
+
+		#sortCrescPretNrDotari, #sortDescrescPretNrDotari, #calcPretMediu {
+			width: var(--large-btn-size);
+		}
+
+		#container-pret-mediu {
+			border: var(--produs-border-size) solid var(--produs-border-color);
+			border-radius: var(--produs-border-radius);
+			padding: 0.5em;
+			width: auto;
+
+			p {
+				margin: 0;
+			}
+		}
   }
 
   #ascunde-dotari {

@@ -37,7 +37,7 @@ window.onload = function () {
 	ascundeDotari();
 
 	// ascunde filtrele
-	document.getElementById("ascunde-filtre").addEventListener('click', function() {
+	document.getElementById("btn-ascunde-filtre").addEventListener('click', function() {
 		var sectiuneFiltre = document.getElementById("filtre-produse");
 
 		if (sectiuneFiltre.style.display == "none")
@@ -57,6 +57,9 @@ window.onload = function () {
 
 	// butonul de filtrare
 	document.getElementById("filtrare").addEventListener('click', function () {
+		if (!valideazaInputuri())
+			return;
+
 		// obtin valorile dupa care sa filtrez
 		// nume
 		var valNume = document.getElementById("inp-nume").value.toLowerCase();
@@ -158,7 +161,7 @@ window.onload = function () {
 
 	// afisez valoarea pe care o indica range-ul
 	document.getElementById("inp-pret").addEventListener("input", function() {
-		document.getElementById("infoRange").innerHTML = `(${document.getElementById("inp-pret").value})`;
+		document.getElementById("infoRange").innerHTML = `${document.getElementById("inp-pret").value}`;
 	});
 
 	// butonul de resetare
@@ -190,13 +193,13 @@ window.onload = function () {
 		}
 	});
 
-	// butonul de sortare crescator dupa pret si nume
-	document.getElementById("sortCrescNume").addEventListener("click", function() {
+	// butonul de sortare crescator dupa pret si numarul de dotari
+	document.getElementById("sortCrescPretNrDotari").addEventListener("click", function() {
 		var produse = document.getElementsByClassName("produs");
 		var vProduse = Array.from(produse);
 
 		vProduse.sort((a, b) => {
-			return cmpProduse(a, b, [{functieCmp: cmpProdusePret, ascending: true}, {functieCmp: cmpProduseNume, ascending: true}]);
+			return cmpProduse(a, b, [{functieCmp: cmpProdusePret, ascending: true}, {functieCmp: cmpProduseDotari, ascending: true}]);
 		});
 
 		for(let produs of vProduse) {
@@ -204,18 +207,39 @@ window.onload = function () {
 		}
 	});
 
-	// butonul de sortare descrescator dupa pret si nume
-	document.getElementById("sortDescrescNume").addEventListener("click", function() {
+	// butonul de sortare descrescator dupa pret si numarul de dotari
+	document.getElementById("sortDescrescPretNrDotari").addEventListener("click", function() {
 		var produse = document.getElementsByClassName("produs");
 		var vProduse = Array.from(produse);
 
 		vProduse.sort((a, b) => {
-			return cmpProduse(a, b, [{functieCmp: cmpProdusePret, ascending: false}, {functieCmp: cmpProduseNume, ascending: false}]);
+			return cmpProduse(a, b, [{functieCmp: cmpProdusePret, ascending: false}, {functieCmp: cmpProduseDotari, ascending: false}]);
 		});
 
 		for(let produs of vProduse) {
 			produs.parentElement.appendChild(produs);
 		}
+	});
+
+	// butonul pentru calculul mediei preturilor
+	document.getElementById("calcPretMediu").addEventListener("click", function() {
+		var produse = document.getElementsByClassName("produs");
+		var pretTotal = 0, nrProduse = 0;
+
+		for (let produs of produse)
+			if (produs.style.display != "none") {
+				pretTotal += parseInt(produs.getElementsByClassName("val-pret")[0].innerHTML);
+				nrProduse++;
+			}
+
+		var pretMediu = Math.round(pretTotal / nrProduse).toFixed(0);
+		document.getElementsByClassName("val-pret-mediu")[0].innerHTML = pretMediu;
+		document.getElementById("container-pret-mediu").style.display = "block";
+		
+		var displayTime = 2000; // ms
+		setTimeout(function () {
+			document.getElementById("container-pret-mediu").style.display = "none";
+		}, displayTime);
 	});
 };
 
@@ -232,6 +256,12 @@ function cmpProduseNume(produsA, produsB, ascending) {
 	return (ascending ? 1 : -1) * numeA.localeCompare(numeB);
 }
 
+function cmpProduseDotari(produsA, produsB, ascending) {
+	var nrDotariA = produsA.getElementsByClassName("val-dotari")[0].innerHTML.split(",").length;
+	var nrDotariB = produsB.getElementsByClassName("val-dotari")[0].innerHTML.split(",").length;
+	return (ascending ? 1 : -1) * (nrDotariA - nrDotariB);
+}
+
 function cmpProduse(produsA, produsB, vObFunctiiCmp) {
 	for(let obFunctieCmp of vObFunctiiCmp) {
 		var rezFunctieCmp = obFunctieCmp.functieCmp(produsA, produsB, obFunctieCmp.ascending);
@@ -240,4 +270,18 @@ function cmpProduse(produsA, produsB, vObFunctiiCmp) {
 	}
 
 	return -1;
+}
+
+function valideazaInputuri() {
+	var valCuvCheie = document.getElementById("textarea-cuv-cheie").value.split(",");
+	
+	for (let cuvCheie of valCuvCheie) {
+		cuvCheie = cuvCheie.trim()
+		if (cuvCheie.split(" ").length > 1) {
+			alert("Cuvintele cheie trebuie să fie separate prin virgulă!");
+			return false;
+		}
+	}
+
+	return true;
 }
