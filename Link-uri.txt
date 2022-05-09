@@ -1,3 +1,5 @@
+nume aplicatie: frozen-everglades-33559
+
 https://frozen-everglades-33559.herokuapp.com/
 https://git.heroku.com/frozen-everglades-33559.git
 
@@ -7,3 +9,5 @@ Database
 ddc50ndf2ged35
 User
 lqyvncxhxqraja
+
+Postgresql Add-on: postgresql-fitted-15086

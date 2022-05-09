@@ -39,6 +39,7 @@ var client = new Client({
   port: client_port,
   ssl: { rejectUnauthorized: false }
 });
+
 client.connect();
 
 // obiect global
@@ -423,5 +424,5 @@ function getDotariFromDB() {
 
 var s_port = process.env.PORT || 5000;
 app.listen(s_port, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server is running on port ${s_port}.`);
 });
