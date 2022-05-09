@@ -8,10 +8,27 @@ const { Client } = require("pg");
 const app = express();
 
 // Conectarea la baza de date
-const client_username = "pstefan";
-const client_password = "1234";
-const client_database = "AutoTrade";
-const client_host = "localhost";
+
+// Client local //////////////////////////////////
+// const client_username = "pstefan";
+// const client_password = "1234";
+// const client_database = "AutoTrade";
+// const client_host = "localhost";
+// const client_port = 5432;
+
+// var client = new Client({
+//   user: client_username,
+//   password: client_password,
+//   database: client_database,
+//   host: client_host,
+//   port: client_port,
+// });
+
+// Client Heroku /////////////////////////////////
+const client_username = "ec2-54-164-40-66.compute-1.amazonaws.com";
+const client_password = "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3";
+const client_database = "ddc50ndf2ged35";
+const client_host = "ec2-54-164-40-66.compute-1.amazonaws.com";
 const client_port = 5432;
 
 var client = new Client({
@@ -20,6 +37,7 @@ var client = new Client({
   database: client_database,
   host: client_host,
   port: client_port,
+  ssl: { rejectUnauthorized: false }
 });
 client.connect();
 

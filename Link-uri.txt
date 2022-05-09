@@ -1,2 +1,9 @@
-https://agile-anchorage-41148.herokuapp.com/
- https://git.heroku.com/agile-anchorage-41148.git
+https://frozen-everglades-33559.herokuapp.com/
+https://git.heroku.com/frozen-everglades-33559.git
+
+Host
+ec2-54-164-40-66.compute-1.amazonaws.com
+Database
+ddc50ndf2ged35
+User
+lqyvncxhxqraja
