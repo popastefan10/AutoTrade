@@ -25,7 +25,7 @@ const app = express();
 // });
 
 // Client Heroku /////////////////////////////////
-const client_username = "ec2-54-164-40-66.compute-1.amazonaws.com";
+const client_username = "lqyvncxhxqraja";
 const client_password = "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3";
 const client_database = "ddc50ndf2ged35";
 const client_host = "ec2-54-164-40-66.compute-1.amazonaws.com";
