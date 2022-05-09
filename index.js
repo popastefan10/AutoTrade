@@ -73,8 +73,6 @@ app.get(["/", "/home", "/index"], (req, res) => {
 
 // Galerie statica - compilare sass, ejs
 app.get("*/galerie_statica.css", (req, res) => {
-  console.log("Request at \"*/galerie_statica.css\"");
-
   filtreazaGalerieStatica();
   var nrImagini = obGlobal.obImaginiGalerieStatica.length;
   compileSassWithEJS(res, "galerie_statica", { nrImagini: nrImagini });
@@ -237,8 +235,6 @@ filtreazaGalerieAnimata();
 //    numeFisier = numele fisierului fara extensie
 //    ejsLocals = optiunile trimise procesorului de ejs
 function compileSassWithEJS(res, numeFisier, ejsLocals) {
-  console.log("Ineputul functiei compileSassWithEJS");
-
   // Obtin codul sass
   var sirScss = fs
     .readFileSync(__dirname + `/resurse/sass/${numeFisier}.scss`)
@@ -247,14 +243,8 @@ function compileSassWithEJS(res, numeFisier, ejsLocals) {
   // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
   var rezScss = ejs.render(sirScss, ejsLocals);
   var caleScss = __dirname + `/temp/${numeFisier}.scss`;
-  if (!fs.existsSync("/temp")) {
-    console.log("Folderul temp nu exista!");
-    fs.mkdir("/temp");
-  }
-  else {
-    console.log("Folderul temp exista deja!");
-    console.log(fs.readdirSync("/temp"));
-  }
+  if (!fs.existsSync("/temp"))
+    fs.mkdir("/temp", function (err) { console.log(err); });
   fs.writeFileSync(caleScss, rezScss);
 
   try {
@@ -267,7 +257,6 @@ function compileSassWithEJS(res, numeFisier, ejsLocals) {
 
     // Send response
     res.setHeader("Content-Type", "text/css");
-    console.log("Inainte de a trimite fisierul CSS");
     res.sendFile(caleCss);
   } catch (err) {
     console.log(err);
