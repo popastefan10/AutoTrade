@@ -4,6 +4,5 @@ inputuri radio (am deja, filtreaza cai putere)
 select simplu (am deja, filtreaza caroseria)
 inputuri checkbox (am, trebuie sa filtreze dotarile)
 textarea (am, trebuie sa filtreze descrierea)
-
-select multiplu (Nu am, nu stiu inca ce trebuie sa filtreze)
-datalist
+datalist (am, filtreaza producatorul)
+select multiplu (am, nu stiu inca ce trebuie sa filtrez)

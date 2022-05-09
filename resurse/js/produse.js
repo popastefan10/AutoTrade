@@ -64,6 +64,13 @@ window.onload = function () {
 		// producator
 		var valProducator = document.getElementById("input-producator").value;
 
+		// tipuri de motoare
+		var selectTipuriDeMotoare = document.getElementById("select-tip-motor");
+		var valTipuriDeMotoare = new Array();
+		for (let optiuneTipMotor of selectTipuriDeMotoare.querySelectorAll("option"))
+			if (optiuneTipMotor.selected)
+				valTipuriDeMotoare.push(optiuneTipMotor.value);
+
 		// interval cai putere
 		var butoaneRadio = document.getElementsByName("gr_rad");
 		for (let butonRadio of butoaneRadio)
@@ -108,6 +115,9 @@ window.onload = function () {
 			var producatorProdus = produs.getElementsByClassName("val-producator")[0].innerHTML;
 			var condProducator = valProducator == "" || producatorProdus == valProducator;
 
+			var tipMotorProdus = produs.getElementsByClassName("val-tip-motor")[0].innerHTML;
+			var condTipMotor = valTipuriDeMotoare.length == 0 || valTipuriDeMotoare.includes(tipMotorProdus);
+
 			var caiPutereProdus = parseInt(produs.getElementsByClassName("val-cai-putere")[0].innerHTML);
 			var condCaiPutere = caiPutereProdus >= minCaiPutere && caiPutereProdus < maxCaiPutere;
 
@@ -135,6 +145,7 @@ window.onload = function () {
 			var condFinala =
 				condNume &&
 				condProducator &&
+				condTipMotor &&
 				condCaiPutere &&
 				condPret &&
 				condTipCaroserie &&
@@ -160,6 +171,11 @@ window.onload = function () {
 		document.getElementById("infoRange").innerHTML = `(${document.getElementById("inp-pret").defaultValue})`;
 		document.getElementById("sel-toate").selected = true;
 		document.getElementById("textarea-cuv-cheie").value = "";
+
+		// tipuri de motoare
+		var selectTipuriDeMotoare = document.getElementById("select-tip-motor");
+		for (let optiuneTipMotor of selectTipuriDeMotoare.querySelectorAll("option"))
+			optiuneTipMotor.selected = false;
 
 		// dotari
 		var checkboxuriDotari = document.getElementsByName("dotari");

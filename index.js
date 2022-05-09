@@ -87,6 +87,7 @@ app.get("/produse", function(req, res) {
       produse: rezQuery.rows,
       optiuni: obGlobal.tipuriCaroserii,
       producatori: obGlobal.producatori,
+      tipuriDeMotoare: obGlobal.tipuriDeMotoare,
       cai_putere: obGlobal.cai_putere,
       pret: obGlobal.pret,
       dotari: obGlobal.dotari
@@ -286,6 +287,7 @@ function randeazaEroare(res, identificator, titlu, text, imagine) {
 function getInfoFromDB() {
   getTipuriCaroseriiFromDB();
   getProducatoriFromDB();
+  getTipuriDeMotoareFromDB();
   getCaiPutereFromDB();
   getPretFromDB();
   getDotariFromDB();
@@ -320,6 +322,25 @@ function getProducatoriFromDB() {
       obGlobal.producatori.toti = producatori;
     }
   })
+}
+
+function getTipuriDeMotoareFromDB() {
+  obGlobal.tipuriDeMotoare = new Object();
+
+  var tipuriDeMotoareQuery = "SELECT DISTINCT tip_motor FROM masini;";
+  client.query(tipuriDeMotoareQuery, function(err, rezQuery) {
+    if(err)
+      console.log(err);
+    else {
+      obGlobal.tipuriDeMotoare.toate = new Array();
+      for (let tipMotor of rezQuery.rows)
+        obGlobal.tipuriDeMotoare.toate.push(tipMotor.tip_motor);
+      
+      obGlobal.tipuriDeMotoare.toate.sort(function (tip1, tip2) {
+        return parseInt(tip1.substr(1)) - parseInt(tip2.substr(1));
+      });
+    }
+  });
 }
 
 // Preia maximul si minimul de cai putere

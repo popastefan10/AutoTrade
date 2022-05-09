@@ -42,8 +42,20 @@
 					</datalist>
 				</div>
 
+				<!-- (BD) select multiplu, filtreaza dupa tipul de motor -->
+				<div class="optiune-filtru">
+					<label>Tipul de motor:</label>
+					<br />
+					<select id="select-tip-motor" name="select-tip-motor" multiple size="6">
+						<% for (let tipMotor of locals.tipuriDeMotoare.toate) { %>
+							<option value="<%- tipMotor %>"><%- tipMotor %></option>
+						<% } %>
+					</select>
+				</div>
+
         <!-- (BD) butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
-        <div class="optiune-filtru"> Putere:
+        <div class="optiune-filtru"> 
+					<label>Putere:</label>
           <% if(locals.cai_putere.min < 300) { %>
             <p>
               <label>Economica (cai putere &lt; 300)
@@ -81,28 +93,30 @@
 
         <!-- (BD) range, filtreaza dupa pret -->
         <div class="optiune-filtru">
-          <label> Pret minim: <input type="range" id="inp-pret" value="<%- locals.pret.min %>" min="0" max="<%- locals.pret.max %>" step="1000"> 
-            <span id="infoRange">(<%- locals.pret.min %>)</span>
-          </label>
+          <label>Pret minim:</label>
+					<br />
+					<input type="range" id="inp-pret" value="<%- locals.pret.min %>" min="0" max="<%- locals.pret.max %>" step="1000"> 
+          <span id="infoRange">(<%- locals.pret.min %>)</span>
         </div>
 
         <!-- (BD) select, filtreaza dupa tipul caroseriei -->
         <div class="optiune-filtru">
-          <label>Tip caroserie:
-            <select id="inp-categorie">
-              <option id="sel-toate" selected value="toate">toate</option>
-              <% for (let optiune of locals.optiuni) { %>
-                <option value="<%- optiune %>">
-                  <%- optiune %>
-                </option>
-              <% } %>
-            </select>
-          </label>
+          <label>Tip caroserie:</label>
+					<br />
+					<select id="inp-categorie">
+						<option id="sel-toate" selected value="toate">toate</option>
+						<% for (let optiune of locals.optiuni) { %>
+							<option value="<%- optiune %>">
+								<%- optiune %>
+							</option>
+						<% } %>
+					</select>
         </div>
 
         <!-- (BD) checkbox, filtreaza dupa dotari -->
         <div class="optiune-filtru">
-          <span>Dotări:</span>
+          <label>Dotări:</label>
+					<br />
           <% var dotariSortate = Array.from(locals.dotari.toate).sort() %>
           <% for (let dotare of dotariSortate) { %>
             <div class="container-dotare">
@@ -118,8 +132,9 @@
 
         <!-- textarea, filtreaza dupa descrieri -->
         <div class="optiune-filtru" id="container-cuv-cheie">
-          <p>Cuvinte cheie:</p>
-          <textarea id="textarea-cuv-cheie" name="textarea-cuv-cheie" rows="3" cols="20"></textarea>
+          <label>Cuvinte cheie:</label>
+					<br />
+          <textarea id="textarea-cuv-cheie" name="textarea-cuv-cheie" rows="3" cols="20" placeholder="Introduceti cuvinte separate prin virgula..."></textarea>
         </div>
       </div>
       
@@ -165,6 +180,7 @@
 										<th style="display: none;">Producator</th>
 										<th>Cai putere</th>
 										<th>Motor</th>
+										<th style="display: none;">Tip motor</th>
 										<th>Dotări</th>
 										<th>Data postării</th>
 										<th>Mașină nouă</th>
@@ -173,6 +189,7 @@
 										<td style="display: none;"><span class="val-producator"><%- prod.producator %></span></td>
 										<td><span class="val-cai-putere"><%- prod.cai_putere%></span></td>
 										<td><span><%- prod.motor %></span></td>
+										<td style="display: none;"><span class="val-tip-motor"><%- prod.tip_motor %></span></td>
 										<td><span class="val-dotari"><%- prod.dotari.join(", ") %></span></td>
 										<td><span><%- data_formatata %></span></td>
 										<td><span><%- prod.folosita ? "Nu" : "Da" %></span></td>
