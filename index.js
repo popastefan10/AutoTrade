@@ -243,8 +243,8 @@ function compileSassWithEJS(res, numeFisier, ejsLocals) {
   // Compilez ejs-ul si obtin un nou sass pe care il pun in folder-ul temp
   var rezScss = ejs.render(sirScss, ejsLocals);
   var caleScss = __dirname + `/temp/${numeFisier}.scss`;
-  if (!fs.existsSync("/temp"))
-    fs.mkdir("/temp", function (err) { console.log(err); });
+  if (!fs.existsSync(__dirname + "/temp"))
+    fs.mkdir(__dirname + "/temp", function (err) { console.log(err); });
   fs.writeFileSync(caleScss, rezScss);
 
   try {
