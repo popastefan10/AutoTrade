@@ -1,31 +1,28 @@
 :root {
-  --tr_odd_child_color: var(--light-blue2);
-  --tr_even_child_color: var(--light-blue4);
-  --tfoot_color: var(--tr_even_child_color);
-  --tr_hover_color: var(--light-blue5);
   --tr_hover_color_change_transition_duration: var(--standard_transition_duration);
 }
 
-#tabel_main {
+table {
   caption-side: bottom;
   border-spacing: 5px;
 }
-#tabel_main th, #tabel_main td {
+table th, table td {
+  padding: 0.3em;
   border: 1px solid black;
 }
-#tabel_main tbody tr:nth-child(odd) {
+table tbody tr:nth-child(odd) {
   background-color: var(--tr_odd_child_color);
 }
-#tabel_main tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   background-color: var(--tr_even_child_color);
 }
-#tabel_main tfoot {
+table tfoot {
   background-color: var(--tfoot_color);
 }
-#tabel_main tbody tr, #tabel_main tfoot {
+table tbody tr, table tfoot {
   transition: background-color var(--tr_hover_color_change_transition_duration) linear;
 }
-#tabel_main tbody tr:hover, #tabel_main tfoot:hover {
+table tbody tr:hover, table tfoot:hover {
   background-color: var(--tr_hover_color);
 }
 

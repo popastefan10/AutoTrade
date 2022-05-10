@@ -1,9 +1,14 @@
 :root {
-  --light-blue1: #f1faff;
+  /* --light-blue1: #f1faff;
   --light-blue2: #e8eefd;
   --light-blue3: #d0dcfc;
   --light-blue4: #aabff9;
-  --light-blue5: #7496f5;
+  --light-blue5: #7496f5; */
+  --light-blue1: #e9f7ff;
+  --light-blue2: #d6f1ff;
+  --light-blue3: #ace2ff;
+  --light-blue4: #89d6ff;
+  --light-blue5: #5fc7ff;
   --blue1: #26b3ff;
   --blue2: #22a1e6;
   --blue3: #1d86bf;
@@ -12,4 +17,83 @@
   --blue6: #081222;
   --blue7: #02050a;
   --blue6-transparent: rgba(8, 18, 34, 0.3);
+
+  --second-blue2: #32a3e0;
+  --second-blue3: #1d89c3;
+  --second-blue4: #176d9a;
+  --second-blue5: #0f4866;
+  --second-blue6: #0b354b;
+
+  --white3: #d7dadc;
+  --darkgrey5: #1a1a1b;
+  --black3: #030303;
+}
+
+body {
+  --main-color: var(--blue5);
+  --main-color-darker: var(--blue6);
+  --main-color-darkest: var(--blue7);
+  --secondary-color: var(--blue1);
+
+  --bkg-color: white;
+  --btn-color: var(--main-color);
+  --border-color: var(--main-color-darker);
+  --shadow-color: var(--blue6-transparent);
+
+  --dark-text-color: var(--main-color-darker);
+  --light-text-color: var(--white3);
+  --text-color: var(--dark-text-color);
+
+  --nav_background_color: var(--main-color);
+  --nav-hover-bkg-color: var(--secondary-color);
+  --nav-text-color: white;
+
+  --content-section-bkg-color: white;
+
+  --tr_odd_child_color: white;
+  --tr_even_child_color: var(--light-blue2);
+  --tfoot_color: var(--tr_even_child_color);
+  --tr_hover_color: var(--light-blue4);
+
+  --link-top-border-color: var(--blue5);
+  --link-top-triangle-color: var(--blue5);
+
+  --tracks_bkg_color: white;
+  --tracks_color: var(--dark-text-color);
+}
+
+/* Tema dark */
+body.dark {
+  --bkg-color: var(--black3);
+  --btn-color: var(--second-blue4);
+  --border-color: var(--second-blue5);
+  --shadow-color: grey;
+
+  --text-color: var(--light-text-color);
+
+  /* nav */
+  --nav_background_color: var(--second-blue4);
+  --nav-hover-bkg-color: var(--second-blue3);
+  --nav-text-color: white;
+
+  /* content-section */
+  --content-section-bkg-color: var(--darkgrey5);
+
+  /* tabel */
+  --tr_odd_child_color: var(--second-blue5);
+  --tr_even_child_color: var(--second-blue6);
+  --tfoot_color: var(--tr_even_child_color);
+  --tr_hover_color: var(--second-blue3);
+
+  /* link top */
+  --link-top-border-color: var(--second-blue5);
+  --link-top-triangle-color: var(--second-blue5);
+}
+
+body.dark a {
+  color: var(--second-blue2);
+}
+
+body.dark nav a {
+  color: var(--nav-text-color);
 }

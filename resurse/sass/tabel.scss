@@ -1,17 +1,13 @@
 :root {
-  --tr_odd_child_color: var(--light-blue2);
-  --tr_even_child_color: var(--light-blue4);
-  --tfoot_color: var(--tr_even_child_color);
-  --tr_hover_color: var(--light-blue5);
-
   --tr_hover_color_change_transition_duration: var(--standard_transition_duration);
 }
 
-#tabel_main {
+table {
   caption-side: bottom;
   border-spacing: 5px;
 
   th, td {
+    padding: 0.3em;
     border: 1px solid black;
   }
 

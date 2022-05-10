@@ -5,7 +5,6 @@
   --ascunde-filtre-bkg-color: var(--blue5);
   --ascunde-filtre-color: white;
 
-	--produs-border-color: var(--blue6);
 	--produs-border-size: 2px;
 	--produs-border-shadow-color: var(--blue6-transparent);
 	--produs-border-shadow-spread: 5px;
@@ -22,8 +21,8 @@ button {
   margin: 1em;
   width: var(--medium-btn-size);
 
-  background-color: var(--ascunde-filtre-bkg-color);
-  color: var(--ascunde-filtre-color);
+  background-color: var(--btn-color);
+  color: var(--light-text-color);
   border: none;
   border-radius: 3px;
 
@@ -33,7 +32,7 @@ button {
 }
 
 button:hover {
-  text-shadow: 0px 0px 2px white;
+  text-shadow: 0px 0px 2px var(--light-text-color);
 }
 
 #ascunde-filtre {
@@ -56,13 +55,12 @@ button:hover {
 
   .optiuni-filtre {
     margin: 1em;
-    // background-color: var(--blue6-transparent);
 
     .optiune-filtru {
       padding: 0.5em;
       margin-bottom: 0.5em;
       
-      border: var(--produs-border-size) solid var(--produs-border-color);
+      border: var(--produs-border-size) solid var(--border-color);
       border-radius: var(--produs-border-radius);
     }
   }
@@ -97,7 +95,7 @@ button:hover {
       padding-left: 0;
       padding-top: 0;
 
-      background-color: white;
+      background-color: var(--content-section-bkg-color);
       color: var(--blue2);
       
       text-decoration: underline;
@@ -120,8 +118,8 @@ button:hover {
 
 		// margini
 		border-radius: var(--produs-border-radius);
-		border: var(--produs-border-size) solid var(--produs-border-color);
-		box-shadow: 0px 0px var(--produs-border-radius) 0px var(--produs-border-shadow-color);
+		// border: var(--produs-border-size) solid var(--border-color);
+		box-shadow: 0px 0px var(--produs-border-radius) 2px var(--shadow-color);
 		transition: linear box-shadow var(--fast_transition_duration);
 
 		// numele
@@ -191,7 +189,7 @@ button:hover {
 	}
 
 	.produs:hover {
-		box-shadow: 0px 0px var(--produs-border-radius) var(--produs-border-shadow-spread) var(--produs-border-shadow-color);
+		box-shadow: 0px 0px var(--produs-border-radius) var(--produs-border-shadow-spread) var(--shadow-color);
 	}
 }
 

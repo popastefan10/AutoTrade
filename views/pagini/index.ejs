@@ -76,50 +76,6 @@
   </head>
 
   <body>
-    <!-- <header>
-      <h1>AutoTrade</h1>
-    </header>
-
-    <nav>
-      <label id="hamburger" for="ch-menu">
-        <img src="./resurse/imagini/Hamburger_icon_alb.png" />
-      </label>
-      <input id="ch-menu" type="checkbox" />
-      <ul class="menu">
-        <li class="">
-          <div><i class="fa-solid fa-house-chimney fa-sm"></i> Acasa</div>
-          <div><i class="fa-solid fa-house-chimney fa-sm"></i></div>
-          <ul>
-            <li>
-              <a href="#despre">Despre site</a>
-            </li>
-            <li>
-              <a href="#anunturi_noi">Anunturi noi</a>
-            </li>
-            <li><a href="#faq">FAQ</a></li>
-            <li>
-              <a href="#informatii_utile">Informatii utile</a>
-            </li>
-          </ul>
-        </li>
-        <li class="">
-          <div><a href="">Masini</a></div>
-        </li>
-        <li class="">
-          <div><a href="">Ghiduri</a></div>
-        </li>
-        <li class="">
-          <div>Inregistrare</div>
-          <ul>
-            <li><a href="">Log In</a></li>
-            <li><a href="">Sign Up</a></li>
-            <li>
-              <a href="">Contul meu</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>  -->
     <%- include("../fragmente/header.ejs"); %>
 
     <main>
@@ -133,7 +89,7 @@
 
       <div id="grid_main">
         <div id="grid_main_area_1">
-          <section id="despre">
+          <section id="despre" class="content-section">
             <h2>Despre site</h2>
             <div class="print_display_none">
               <video
@@ -292,7 +248,7 @@
         </div>
 
         <div id="grid_main_area_2">
-          <section id="tipuri_caroserie">
+          <section id="tipuri_caroserie" class="content-section">
             <h2>Tipuri de caroserie</h2>
 
             <div id="container_tabel">
@@ -358,7 +314,7 @@
         </div>
 
         <div id="grid_main_area_3">
-          <section id="calendar_evenimente">
+          <section id="calendar_evenimente" class="content-section">
             <h2>Calendar evenimente</h2>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
@@ -372,7 +328,7 @@
         </div>
 
         <div id="grid_main_area_4">
-          <section id="anunturi">
+          <section id="anunturi" class="content-section">
             <h2>Anunturi</h2>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
@@ -385,7 +341,7 @@
           </section>
         </div>
         <div id="grid_main_area_5">
-          <section id="utilizatori_online">
+          <section id="utilizatori_online" class="content-section">
             <h2>Utilizatori online</h2>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
@@ -398,7 +354,7 @@
           </section>
         </div>
         <div id="grid_main_area_6">
-          <section id="date_utilizatori">
+          <section id="date_utilizatori" class="content-section">
             <h2>Date despre utilizator si statistici</h2>
             <div>
               <p>Adresa IP: <%- locals.ip %></p>
@@ -413,7 +369,7 @@
           </section>
         </div>
         <div id="grid_main_area_7">
-          <section id="date_site_server">
+          <section id="date_site_server" class="content-section">
             <h2>Date despre site si server</h2>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
@@ -427,7 +383,7 @@
         </div>
 
         <div id="grid_main_area_8" class="print_display_none">
-          <section id="anunturi_noi">
+          <section id="anunturi_noi" class="content-section">
             <h2>Anunturi noi</h2>
             <picture>
               <source
@@ -445,7 +401,7 @@
             </picture>
           </section>
 
-          <section id="faq">
+          <section id="faq" class="content-section">
             <h2>FAQ</h2>
             <details>
               <summary>Q: Ce masini sunt expuse la reprezentanta?</summary>
@@ -477,87 +433,6 @@
       </div>
     </main>
 
-    <!-- <footer>
-      <div class="link-top">
-        <a href="#top" title="Mergi la inceput">
-          <div>
-            <div class="link-top-triangle"></div>
-          </div>
-        </a>
-      </div>
-
-      <section id="informatii_utile">
-        <h2>Informatii utile</h2>
-        <section id="contact">
-          <h3>Contact</h3>
-          <p>
-            Pentru mai multe informatii folositi urmatoarele date de contact:
-          </p>
-          <address>
-            <ul>
-              <li>
-                <a href="tel:+40123456789">
-                  <i class="fa-solid fa-mobile-screen-button"></i> Telefon:
-                  +40123456789
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/+40123456789" target="_blank">
-                  <i class="fa-brands fa-whatsapp"></i> Whatsapp: +40123456789
-                </a>
-              </li>
-              <li>
-                <a href="mailto:popashtefan10@gmail.com">
-                  <i class="fa-solid fa-envelope"></i> Mail:
-                  popashtefan10@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="https://goo.gl/maps/g7aR9Ti747Fi2gBB8" target="_blank">
-                  <i class="fas fa-compass fa-spin"></i> Locatie:
-                </a>
-                <br />
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d712.2210747731951!2d26.099062719362447!3d44.43553551305406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x493984726f0235f9!2sFaculty%20of%20Mathematics%20and%20Informatics%20-%20University%20of%20Bucharest!5e0!3m2!1sen!2sro!4v1645606091505!5m2!1sen!2sro"
-                  width="400"
-                  height="225"
-                  style="border: 0"
-                  allowfullscreen=""
-                  loading="lazy"
-                ></iframe>
-              </li>
-            </ul>
-          </address>
-        </section>
-
-        <section id="program">
-          <h3>Program</h3>
-          <ul>
-            <li><p>Luni-Vineri: 09:00-19:00</p></li>
-            <li><p>Sambata: 09:00-17:00</p></li>
-            <li><p>Duminica: inchis</p></li>
-          </ul>
-        </section>
-
-        <section id="termeni_si_conditii">
-          <h3>Termeni si conditii</h3>
-          <p>
-            De aici puteti descarca
-            <a href="./resurse/termeni_si_conditii/Termeni_si_conditii.docx"
-              >Termenii si conditiile</a
-            >
-            pentru folosirea site-ului AutoTrade.
-          </p>
-        </section>
-      </section>
-
-      <p>
-        <small
-          >Copyright &copy;
-          <time datetime="2022-02-26">Februarie 2022</time> Stefan Popa</small
-        >
-      </p>
-    </footer> -->
     <%- include("../fragmente/footer.ejs"); %>
   </body>
 </html>

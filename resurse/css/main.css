@@ -1,210 +1,136 @@
 :root {
-  --background_color: white;
-  --main_background_color: white;
-  --div-background-color: white;
-  --text_color: var(--blue6);
-
   --large_screen_min_width: 1024px;
   --medium_screen_min_width: 700px;
-
   --small-font-size: 13px;
   --medium-font-size: 14px;
   --large-font-size: 16px;
-
   --standard_transition_duration: 0.5s;
   --fast_transition_duration: 0.3s;
 }
 
+.content-section {
+  padding: 1em;
+  margin: 1em;
+  background-color: var(--content-section-bkg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 1em;
+}
+
 body {
   margin: 0;
-  background-color: var(--background_color);
-  color: var(--text_color);
-
-  font-family: 'Roboto', sans-serif;
+  background-color: var(--bkg-color);
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
 }
-
-body.dark {
-  --background_color: var(--blue7);
-  --main_background_color: var(--blue6);
-  --div_background_color: #3d3f63;
-  --text_color: white;
-}
-
-main {
+body main {
   margin-top: 0;
 }
-
-h2 {
+body h2 {
   text-align: center;
 }
+body #grid_main {
+  display: grid;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii {
+  display: grid;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_suv {
+  grid-area: grid_caroserii_suv;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_estate {
+  grid-area: grid_caroserii_estate;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_sedan {
+  grid-area: grid_caroserii_sedan;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_coupe {
+  grid-area: grid_caroserii_coupe;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_cabriolet {
+  grid-area: grid_caroserii_cabriolet;
+}
+body #grid_main #grid_main_area_1 #grid_caroserii_hatchback {
+  grid-area: grid_caroserii_hatchback;
+}
+body #grid_main #grid_main_area_1 {
+  grid-area: grid_main_area_1;
+}
+body #grid_main #grid_main_area_2 {
+  grid-area: grid_main_area_2;
+}
+body #grid_main #grid_main_area_3 {
+  grid-area: grid_main_area_3;
+}
+body #grid_main #grid_main_area_4 {
+  grid-area: grid_main_area_4;
+}
+body #grid_main #grid_main_area_5 {
+  grid-area: grid_main_area_5;
+}
+body #grid_main #grid_main_area_6 {
+  grid-area: grid_main_area_6;
+}
+body #grid_main #grid_main_area_7 {
+  grid-area: grid_main_area_7;
+}
+body #grid_main #grid_main_area_8 {
+  grid-area: grid_main_area_8;
+}
 
-/* Big screen */
 @media screen and (min-width: 1024px) {
   :root {
     font-size: var(--large-font-size);
   }
 
-  main {
-    margin-left: 4em;
-    margin-right: 4em;
-  }
-
-  #grid_caroserii {
+  main #grid_caroserii {
     grid-template-columns: repeat(3, auto);
-    grid-template-areas:
-      "grid_caroserii_suv grid_caroserii_estate grid_caroserii_sedan"
-      "grid_caroserii_coupe grid_caroserii_cabriolet grid_caroserii_hatchback";
+    grid-template-areas: "grid_caroserii_suv grid_caroserii_estate grid_caroserii_sedan" "grid_caroserii_coupe grid_caroserii_cabriolet grid_caroserii_hatchback";
   }
-
-  #grid_caroserii img {
+  main #grid_caroserii img {
     width: 200px;
     height: auto;
   }
-
-  #grid_main {
+  main #grid_main {
     grid-template-columns: repeat(4, auto);
-    grid-template-areas:
-      "grid_main_area_1 grid_main_area_1 grid_main_area_1 grid_main_area_1"
-      "grid_main_area_8 grid_main_area_8 grid_main_area_8 grid_main_area_8"
-      "grid_main_area_3 grid_main_area_2 grid_main_area_2 grid_main_area_4"
-      "grid_main_area_5 grid_main_area_6 grid_main_area_7 grid_main_area_7";
+    grid-template-areas: "grid_main_area_1 grid_main_area_1 grid_main_area_1 grid_main_area_1" "grid_main_area_8 grid_main_area_8 grid_main_area_8 grid_main_area_8" "grid_main_area_3 grid_main_area_2 grid_main_area_2 grid_main_area_4" "grid_main_area_5 grid_main_area_6 grid_main_area_7 grid_main_area_7";
   }
 }
-
-/* Medium screen */
 @media screen and (min-width: 700px) and (max-width: 1024px) {
   :root {
     font-size: var(--medium-font-size);
   }
 
-  main {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-
-  #grid_caroserii {
+  main #grid_caroserii {
     grid-template-columns: repeat(3, auto);
-    grid-template-areas:
-      "grid_caroserii_suv grid_caroserii_estate grid_caroserii_sedan"
-      "grid_caroserii_coupe grid_caroserii_cabriolet grid_caroserii_hatchback";
+    grid-template-areas: "grid_caroserii_suv grid_caroserii_estate grid_caroserii_sedan" "grid_caroserii_coupe grid_caroserii_cabriolet grid_caroserii_hatchback";
   }
-
-  #grid_caroserii img {
+  main #grid_caroserii img {
     width: 150px;
     height: auto;
   }
-
-  #grid_main {
+  main #grid_main {
     grid-template-columns: repeat(2, auto);
-    grid-template-areas:
-      "grid_main_area_1 grid_main_area_1"
-      "grid_main_area_8 grid_main_area_8"
-      "grid_main_area_2 grid_main_area_2"
-      "grid_main_area_3 grid_main_area_4"
-      "grid_main_area_6 grid_main_area_6"
-      "grid_main_area_5 grid_main_area_7";
+    grid-template-areas: "grid_main_area_1 grid_main_area_1" "grid_main_area_8 grid_main_area_8" "grid_main_area_2 grid_main_area_2" "grid_main_area_3 grid_main_area_4" "grid_main_area_6 grid_main_area_6" "grid_main_area_5 grid_main_area_7";
   }
 }
-
 /* Small screen */
 @media screen and (max-width: 700px) {
   :root {
     font-size: var(--small-font-size);
   }
 
-  main {
-    margin-left: 0em;
-    margin-right: 0em;
-  }
-
-  #grid_caroserii {
+  main #grid_caroserii {
     grid-template-columns: repeat(2, auto);
-    grid-template-areas:
-      "grid_caroserii_suv grid_caroserii_estate"
-      "grid_caroserii_sedan grid_caroserii_coupe"
-      "grid_caroserii_cabriolet grid_caroserii_hatchback";
+    grid-template-areas: "grid_caroserii_suv grid_caroserii_estate" "grid_caroserii_sedan grid_caroserii_coupe" "grid_caroserii_cabriolet grid_caroserii_hatchback";
   }
-
-  #grid_caroserii img {
+  main #grid_caroserii img {
     width: 100px;
     height: auto;
   }
-
-  #grid_main {
+  main #grid_main {
     grid-template-columns: repeat(3, auto);
-    grid-template-areas:
-      "grid_main_area_1"
-      "grid_main_area_8"
-      "grid_main_area_2"
-      "grid_main_area_3"
-      "grid_main_area_4"
-      "grid_main_area_6"
-      "grid_main_area_5"
-      "grid_main_area_7";
+    grid-template-areas: "grid_main_area_1" "grid_main_area_8" "grid_main_area_2" "grid_main_area_3" "grid_main_area_4" "grid_main_area_6" "grid_main_area_5" "grid_main_area_7";
   }
 }
 
-/* Grid caroserii */
-#grid_caroserii {
-  display: grid;
-}
-
-#grid_caroserii_suv {
-  grid-area: grid_caroserii_suv;
-}
-#grid_caroserii_estate {
-  grid-area: grid_caroserii_estate;
-}
-#grid_caroserii_sedan {
-  grid-area: grid_caroserii_sedan;
-}
-#grid_caroserii_coupe {
-  grid-area: grid_caroserii_coupe;
-}
-#grid_caroserii_cabriolet {
-  grid-area: grid_caroserii_cabriolet;
-}
-#grid_caroserii_hatchback {
-  grid-area: grid_caroserii_hatchback;
-}
-
-/* Grid main */
-#grid_main {
-  display: grid;
-  background-color: var(--main_background_color);
-}
-
-#grid_main > div {
-  border: 0px solid #0a2d40;
-  border-radius: 1em;
-
-  background-color: var(--div_background_color);
-
-  padding: 10px;
-  margin: 10px;
-}
-
-#grid_main_area_1 {
-  grid-area: grid_main_area_1;
-}
-#grid_main_area_2 {
-  grid-area: grid_main_area_2;
-}
-#grid_main_area_3 {
-  grid-area: grid_main_area_3;
-}
-#grid_main_area_4 {
-  grid-area: grid_main_area_4;
-}
-#grid_main_area_5 {
-  grid-area: grid_main_area_5;
-}
-#grid_main_area_6 {
-  grid-area: grid_main_area_6;
-}
-#grid_main_area_7 {
-  grid-area: grid_main_area_7;
-}
-#grid_main_area_8 {
-  grid-area: grid_main_area_8;
-}
+/*# sourceMappingURL=main.css.map */

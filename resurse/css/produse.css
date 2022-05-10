@@ -3,7 +3,6 @@
   --large-btn-size: 16em;
   --ascunde-filtre-bkg-color: var(--blue5);
   --ascunde-filtre-color: white;
-  --produs-border-color: var(--blue6);
   --produs-border-size: 2px;
   --produs-border-shadow-color: var(--blue6-transparent);
   --produs-border-shadow-spread: 5px;
@@ -18,8 +17,8 @@ button {
   padding: 0.5em;
   margin: 1em;
   width: var(--medium-btn-size);
-  background-color: var(--ascunde-filtre-bkg-color);
-  color: var(--ascunde-filtre-color);
+  background-color: var(--btn-color);
+  color: var(--light-text-color);
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -27,7 +26,7 @@ button {
 }
 
 button:hover {
-  text-shadow: 0px 0px 2px white;
+  text-shadow: 0px 0px 2px var(--light-text-color);
 }
 
 #ascunde-filtre {
@@ -46,7 +45,7 @@ button:hover {
 #filtre-produse .optiuni-filtre .optiune-filtru {
   padding: 0.5em;
   margin-bottom: 0.5em;
-  border: var(--produs-border-size) solid var(--produs-border-color);
+  border: var(--produs-border-size) solid var(--border-color);
   border-radius: var(--produs-border-radius);
 }
 #filtre-produse #container-cuv-cheie p {
@@ -70,7 +69,7 @@ button:hover {
 #filtre-produse #ascunde-dotari button {
   padding-left: 0;
   padding-top: 0;
-  background-color: white;
+  background-color: var(--content-section-bkg-color);
   color: var(--blue2);
   text-decoration: underline;
   text-align: left;
@@ -87,8 +86,7 @@ button:hover {
   margin-bottom: 3em;
   padding: 1em;
   border-radius: var(--produs-border-radius);
-  border: var(--produs-border-size) solid var(--produs-border-color);
-  box-shadow: 0px 0px var(--produs-border-radius) 0px var(--produs-border-shadow-color);
+  box-shadow: 0px 0px var(--produs-border-radius) 2px var(--shadow-color);
   transition: linear box-shadow var(--fast_transition_duration);
 }
 .grid-produse .produs h3.nume {
@@ -139,7 +137,7 @@ button:hover {
   height: auto;
 }
 .grid-produse .produs:hover {
-  box-shadow: 0px 0px var(--produs-border-radius) var(--produs-border-shadow-spread) var(--produs-border-shadow-color);
+  box-shadow: 0px 0px var(--produs-border-radius) var(--produs-border-shadow-spread) var(--shadow-color);
 }
 
 @media screen and (max-width: 700px) {

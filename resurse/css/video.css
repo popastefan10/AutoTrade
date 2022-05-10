@@ -1,6 +1,6 @@
 :root {
-  --tracks_bkg_color: white;
-  --tracks_color: var(--text_color);
+  --tracks_bkg_color: var(--bkg-color);
+  --tracks_color: var(--text-color);
 }
 
 video::cue {

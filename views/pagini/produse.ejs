@@ -24,14 +24,14 @@
     <section id="filtre-produse">
       <div class="optiuni-filtre">
         <!-- input de tip text, filtreaza dupa nume -->
-        <div class="optiune-filtru">
+        <div class="optiune-filtru content-section">
           <label for="inp-nume">Nume:</label>
 					<br />
 					<input type="text" id="inp-nume" value="">
         </div>
 
 				<!-- (BD) datalist, filtreaza dupa producator -->
-				<div class="optiune-filtru">
+				<div class="optiune-filtru content-section">
 					<label for="input-producatori">Producător:</label>
 					<br />
 					<input list="datalist-producator" id="input-producator" name="input-producator">
@@ -43,7 +43,7 @@
 				</div>
 
 				<!-- (BD) select multiplu, filtreaza dupa tipul de motor -->
-				<div class="optiune-filtru">
+				<div class="optiune-filtru content-section">
 					<label>Tipul de motor (tineți apasată tasta <i>Ctrl</i> pentru a selecta mai multe):</label>
 					<br />
 					<select id="select-tip-motor" name="select-tip-motor" multiple size="6">
@@ -54,7 +54,7 @@
 				</div>
 
         <!-- (BD) butoane radio, filtreaza dupa cai putere, trebuie sa aiba acelasi name ca sa formeze un grup -->
-        <div class="optiune-filtru"> 
+        <div class="optiune-filtru content-section"> 
 					<label>Putere:</label>
           <% if(locals.cai_putere.min < 300) { %>
             <p>
@@ -92,7 +92,7 @@
         </div>
 
         <!-- (BD) range, filtreaza dupa pret -->
-        <div class="optiune-filtru">
+        <div class="optiune-filtru content-section">
           <label>Preț minim: <span id="infoRange"><%- locals.pret.min %></span></label>
 					<br />
 					<span id="pretRangeMin">(0)</span>
@@ -101,7 +101,7 @@
         </div>
 
         <!-- (BD) select, filtreaza dupa tipul caroseriei -->
-        <div class="optiune-filtru">
+        <div class="optiune-filtru content-section">
           <label>Tip caroserie:</label>
 					<br />
 					<select id="inp-categorie">
@@ -115,7 +115,7 @@
         </div>
 
         <!-- (BD) checkbox, filtreaza dupa dotari -->
-        <div class="optiune-filtru">
+        <div class="optiune-filtru content-section">
           <label>Dotări:</label>
 					<br />
           <% var dotariSortate = Array.from(locals.dotari.toate).sort() %>
@@ -132,7 +132,7 @@
         </div>
 
         <!-- textarea, filtreaza dupa descrieri -->
-        <div class="optiune-filtru" id="container-cuv-cheie">
+        <div class="optiune-filtru content-section" id="container-cuv-cheie">
           <label>Cuvinte cheie:</label>
 					<br />
           <textarea id="textarea-cuv-cheie" name="textarea-cuv-cheie" rows="3" cols="20" placeholder="Introduceti cuvinte separate prin virgula..."></textarea>

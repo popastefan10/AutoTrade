@@ -1,8 +1,5 @@
 :root {
   --nav_height: 3rem;
-  --nav_background_color: var(--blue5);
-  --nav_text_color: white;
-  --menu_btn_hover_color: var(--blue1);
   --menu_btn_width: 150px;
   --menu_btn_bkg_color_transition_duration: var(--standard_transition_duration);
   --menu_link_shadow_y_offset: calc(-2 / 3 * var(--nav_height));
@@ -21,10 +18,10 @@ nav {
   position: sticky;
   z-index: 10;
   background-color: var(--nav_background_color);
-  color: var(--nav_text_color);
+  color: var(--nav-text-color);
 }
 nav a {
-  color: var(--nav_text_color);
+  color: var(--nav-text-color);
   text-decoration: none;
 }
 nav ul,
@@ -54,11 +51,11 @@ nav ul.menu > li {
   transition: background-color var(--menu_btn_bkg_color_transition_duration) linear;
 }
 nav ul.menu > li > div > a {
-  text-shadow: 0px var(--menu_link_shadow_y_offset) white;
+  text-shadow: 0px var(--menu_link_shadow_y_offset) 0px transparent;
   transition: text-shadow var(--menu_link_shadow_transition_duration) linear;
 }
 nav ul.menu > li:hover {
-  background-color: var(--menu_btn_hover_color);
+  background-color: var(--nav-hover-bkg-color);
 }
 nav ul.menu > li:hover > div > a {
   text-shadow: 0px -1px 2px white;
@@ -78,7 +75,7 @@ nav ul.menu ul li {
   transition: background-color var(--menu_link_shadow_transition_duration) linear;
 }
 nav ul.menu ul li:hover {
-  background-color: var(--menu_btn_hover_color);
+  background-color: var(--nav-hover-bkg-color);
 }
 nav ul.menu ul a {
   text-decoration: underline;
