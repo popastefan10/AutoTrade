@@ -33,7 +33,7 @@ function afiseazaDotari() {
 	btnAscundeDotari.innerHTML = "- Mai putine";
 }
 
-window.onload = function () {
+window.addEventListener("load", function () {
 	ascundeDotari();
 
 	// ascunde filtrele
@@ -241,7 +241,7 @@ window.onload = function () {
 			document.getElementById("container-pret-mediu").style.display = "none";
 		}, displayTime);
 	});
-};
+});
 
 // functii de comparare de produse dupa diferite criterii
 function cmpProdusePret(produsA, produsB, ascending) {

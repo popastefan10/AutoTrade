@@ -1,3 +1,12 @@
+<script>
+  // Schimb tema la incarcarea paginii, daca este cazul
+	var tema = localStorage.getItem("tema");
+	if (tema)
+		document.body.classList.add("dark");
+	else 
+		document.body.classList.remove("dark");
+</script>
+
 <header>
   <h1>AutoTrade</h1>
 </header>
@@ -54,7 +63,7 @@
 
     <!-- Inregistrare -->
     <li class="">
-      <div>Inregistrare</div>
+      <div><a href="/inregistrare">Inregistrare</a></div>
       <ul>
         <li><a href="">Log In</a></li>
         <li><a href="">Sign Up</a></li>
@@ -62,4 +71,12 @@
       </ul>
     </li>
   </ul>
+
+  <div id="container-btn-tema">
+    <button id="btn-tema">
+      <span style="font-size: 1.5em; color: white;">
+        <i class="fa-solid fa-sun"></i>
+      </span>
+    </button>
+  </div>
 </nav>

@@ -120,6 +120,18 @@ nav {
       }
     }
   }
+
+  #container-btn-tema {
+    height: 100%;
+
+    button {
+      float: right;
+      margin: 0;
+      padding: 0;
+
+      height: 100%;
+    }
+  }
 }
 
 @keyframes submenu_dropdown {

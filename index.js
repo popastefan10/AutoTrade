@@ -5,30 +5,19 @@ const ejs = require("ejs");
 const sass = require("sass");
 const { Client } = require("pg");
 
+const formidable = require("formidable");
+const crypto = require("crypto");
+const session = require("session");
+
 const app = express();
 
 // Conectarea la baza de date
 
 // Client local //////////////////////////////////
-// const client_username = "pstefan";
-// const client_password = "1234";
-// const client_database = "AutoTrade";
-// const client_host = "localhost";
-// const client_port = 5432;
-
-// var client = new Client({
-//   user: client_username,
-//   password: client_password,
-//   database: client_database,
-//   host: client_host,
-//   port: client_port,
-// });
-
-// Client Heroku /////////////////////////////////
-const client_username = "lqyvncxhxqraja";
-const client_password = "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3";
-const client_database = "ddc50ndf2ged35";
-const client_host = "ec2-54-164-40-66.compute-1.amazonaws.com";
+const client_username = "pstefan";
+const client_password = "1234";
+const client_database = "AutoTrade";
+const client_host = "localhost";
 const client_port = 5432;
 
 var client = new Client({
@@ -37,8 +26,23 @@ var client = new Client({
   database: client_database,
   host: client_host,
   port: client_port,
-  ssl: { rejectUnauthorized: false }
 });
+
+// Client Heroku /////////////////////////////////
+// const client_username = "lqyvncxhxqraja";
+// const client_password = "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3";
+// const client_database = "ddc50ndf2ged35";
+// const client_host = "ec2-54-164-40-66.compute-1.amazonaws.com";
+// const client_port = 5432;
+
+// var client = new Client({
+//   user: client_username,
+//   password: client_password,
+//   database: client_database,
+//   host: client_host,
+//   port: client_port,
+//   ssl: { rejectUnauthorized: false }
+// });
 
 client.connect();
 
@@ -125,6 +129,27 @@ app.get("/produs/:id", function(req, res) {
 // Eroare custom
 app.get("/eroare", function (req, res) {
   randeazaEroare(res, 1, "Titlu custom");
+});
+
+// Utilizatori ///////////////////////////////////
+
+parolaServer = "tehniciweb";
+
+app.post("/inreg", function (req, res) {
+  var formular = new formidable.IncomingForm();
+  formular.parse(req, function (err, campuriText, campuriFisier) {
+    console.log(campuriText);
+    var parolaCriptata = crypto.scryptSync(campuriText.parola, parolaServer, 64).toString("hex");
+    var comandaInserare = 
+      "INSERT INTO utilizatori (username, nume, prenume, parola, email, culoare_chat) " +
+      `VALUES ('${campuriText.username}', '${campuriText.nume}', '${campuriText.prenume}', '${parolaCriptata}', '${campuriText.email}', '${campuriText.culoare_chat}');`;
+    console.log(comandaInserare);
+    client.query(comandaInserare, function (err, rezInserare) {
+      if (err)
+        console.log(err);
+    });
+    res.send("OK");
+  });
 });
 
 // Eroare 403

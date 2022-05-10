@@ -88,6 +88,15 @@ nav ul.menu ul a {
 nav ul.menu ul li:hover a {
   text-decoration-color: rgb(255, 255, 255);
 }
+nav #container-btn-tema {
+  height: 100%;
+}
+nav #container-btn-tema button {
+  float: right;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 @keyframes submenu_dropdown {
   0% {

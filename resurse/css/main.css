@@ -1,5 +1,7 @@
 :root {
   --background_color: white;
+  --main_background_color: white;
+  --div-background-color: white;
   --text_color: var(--blue6);
 
   --large_screen_min_width: 1024px;
@@ -21,6 +23,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+body.dark {
+  --background_color: var(--blue7);
+  --main_background_color: var(--blue6);
+  --div_background_color: #3d3f63;
+  --text_color: white;
+}
+
+main {
+  margin-top: 0;
+}
+
 h2 {
   text-align: center;
 }
@@ -29,6 +42,11 @@ h2 {
 @media screen and (min-width: 1024px) {
   :root {
     font-size: var(--large-font-size);
+  }
+
+  main {
+    margin-left: 4em;
+    margin-right: 4em;
   }
 
   #grid_caroserii {
@@ -59,6 +77,11 @@ h2 {
     font-size: var(--medium-font-size);
   }
 
+  main {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
   #grid_caroserii {
     grid-template-columns: repeat(3, auto);
     grid-template-areas:
@@ -87,6 +110,11 @@ h2 {
 @media screen and (max-width: 700px) {
   :root {
     font-size: var(--small-font-size);
+  }
+
+  main {
+    margin-left: 0em;
+    margin-right: 0em;
   }
 
   #grid_caroserii {
@@ -143,16 +171,17 @@ h2 {
 /* Grid main */
 #grid_main {
   display: grid;
+  background-color: var(--main_background_color);
 }
 
 #grid_main > div {
   border: 0px solid #0a2d40;
-  border-radius: 5px;
+  border-radius: 1em;
 
-  background-color: white;
+  background-color: var(--div_background_color);
 
-  margin: 5px;
   padding: 10px;
+  margin: 10px;
 }
 
 #grid_main_area_1 {
