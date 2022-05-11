@@ -6,22 +6,24 @@
 		<link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
 		<title>AutoTrade - înregistrare </title>
 		<%- include("../fragmente/head") %>     
-		<!-- <script type="text/javascript" src=/resurse/js/inregistrare.js></script> -->
+		<script type="text/javascript" src=/resurse/js/inregistrare.js></script>
 	</head>
 	<body>
 	<%- include("../fragmente/header") %>
 
 	<main>
-	<div class="afisaj">
+	<div class="afisaj content-section">
 		<h1>Inregistrare utilizator</h1>
-		
-		<%-include("../fragmente/formular", {action: "/inreg"}) %>
-	<% if(locals.raspuns) { %>
-	<%- locals.raspuns+"<br/>"%>
-	<% } %>
-	<% if(locals.err) { %>
-	<%- locals.err %>
-	<% } %>
+			
+		<% if (!locals.raspuns) { %>
+		<%-  include("../fragmente/formular", {action: "/inreg"}) %>
+		<% } %>
+		<% if (locals.raspuns) { %>
+		<%-  locals.raspuns+"<br/>" %>
+		<% } %>
+		<% if (locals.err) { %>
+		<%-  locals.err %>
+		<% } %>
 	</div>
 </main>
 

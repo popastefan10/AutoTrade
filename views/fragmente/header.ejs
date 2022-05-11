@@ -60,23 +60,38 @@
     <li class="">
       <div><a href="/ultimele_vanzari">Ultimele vanzari</a></div>
     </li>
-
-    <!-- Inregistrare -->
-    <li class="">
-      <div><a href="/inregistrare">Inregistrare</a></div>
-      <ul>
-        <li><a href="">Log In</a></li>
-        <li><a href="">Sign Up</a></li>
-        <li><a href="">Contul meu</a></li>
-      </ul>
-    </li>
   </ul>
 
-  <div id="container-btn-tema">
-    <button id="btn-tema" style="background-color: var(--nav_background_color);">
-      <span style="font-size: 1.5em; color: white;">
-        <i class="fa-solid fa-sun"></i>
-      </span>
-    </button>
-  </div>
+  <ul class="menu menu-right">
+    <% if (!locals.utilizator) { %>
+      <!-- Login -->
+      <li id="container-btn-login">
+        <div><a href="/login">Login</a></div>
+      </li>
+
+      <!-- Inregistrare -->
+      <li id="container-btn-inregistrare">
+        <div><a href="/inregistrare">Inregistrare</a></div>
+      </li>
+    <% } %>
+
+    <!-- Profil -->
+    <% if (locals.utilizator) { %>
+      <li class="">
+        <div><%- locals.utilizator.username %></div>
+        <ul>
+          <li><a href="/profil">Profil</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    <% } %>
+
+    <li id="container-btn-tema">
+      <button id="btn-tema">
+        <span style="font-size: 1.5em; color: white;">
+          <i class="fa-solid fa-sun"></i>
+        </span>
+      </button>
+    </li>
+  </ul>
 </nav>

@@ -56,7 +56,7 @@ nav {
 // Hamburger logo-ul este apasat
 #ch-menu:checked {
   // Meniul apare cand dau click
-  + ul.menu {
+  ~ ul.menu {
     display: block;
     position: relative;
     z-index: 10;

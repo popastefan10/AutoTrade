@@ -45,29 +45,29 @@ nav ul.menu > li > div > a {
   width: auto;
 }
 
-#ch-menu:checked + ul.menu {
+#ch-menu:checked ~ ul.menu {
   display: block;
   position: relative;
   z-index: 10;
 }
-#ch-menu:checked + ul.menu li {
+#ch-menu:checked ~ ul.menu li {
   background-color: var(--nav_background_color);
   transition: background-color var(--menu_btn_bkg_color_transition_duration) linear;
 }
-#ch-menu:checked + ul.menu li:hover {
+#ch-menu:checked ~ ul.menu li:hover {
   background-color: var(--menu_btn_hover_color);
 }
-#ch-menu:checked + ul.menu li:hover a {
+#ch-menu:checked ~ ul.menu li:hover a {
   text-decoration: none;
 }
-#ch-menu:checked + ul.menu li ul {
+#ch-menu:checked ~ ul.menu li ul {
   position: relative;
 }
-#ch-menu:checked + ul.menu li:hover ul {
+#ch-menu:checked ~ ul.menu li:hover ul {
   display: block;
 }
-#ch-menu:checked + ul.menu > li > div,
-#ch-menu:checked + ul.menu > li > a {
+#ch-menu:checked ~ ul.menu > li > div,
+#ch-menu:checked ~ ul.menu > li > a {
   transform-origin: center;
   animation-name: letter_decompressing;
   animation-duration: 0.6s;

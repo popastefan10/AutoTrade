@@ -7,42 +7,38 @@ const { Client } = require("pg");
 
 const formidable = require("formidable");
 const crypto = require("crypto");
-const session = require("session");
+const session = require("express-session");
+const { NONAME } = require("dns");
 
 const app = express();
 
+app.use(session({
+  secret: 'abcdefg', // folosit de express session pentru criptarea id-ului de sesiune
+  resave: true,
+  saveUninitialized: false
+}));
+
 // Conectarea la baza de date
 
-// Client local //////////////////////////////////
-// const client_username = "pstefan";
-// const client_password = "1234";
-// const client_database = "AutoTrade";
-// const client_host = "localhost";
-// const client_port = 5432;
-
-// var client = new Client({
-//   user: client_username,
-//   password: client_password,
-//   database: client_database,
-//   host: client_host,
-//   port: client_port,
-// });
-
-// Client Heroku /////////////////////////////////
-const client_username = "lqyvncxhxqraja";
-const client_password = "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3";
-const client_database = "ddc50ndf2ged35";
-const client_host = "ec2-54-164-40-66.compute-1.amazonaws.com";
-const client_port = 5432;
-
-var client = new Client({
-  user: client_username,
-  password: client_password,
-  database: client_database,
-  host: client_host,
-  port: client_port,
-  ssl: { rejectUnauthorized: false }
-});
+if (process.env.SITE_ONLINE) { // Client Heroku
+  var client = new Client({
+    user: "lqyvncxhxqraja",
+    password: "9564af8319dffcd7c465af48a941b94d61daa87d36cf119527ca0ec1dd2a0cd3",
+    database: "ddc50ndf2ged35",
+    host: "ec2-54-164-40-66.compute-1.amazonaws.com",
+    port: 5432,
+    ssl: { rejectUnauthorized: false }
+  });
+}
+else { // Client local
+  var client = new Client({
+    user: "pstefan",
+    password: "1234",
+    database: "AutoTrade",
+    host: "localhost",
+    port: 5432,
+  });
+}
 
 client.connect();
 
@@ -56,9 +52,10 @@ obGlobal = {
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
-// Trimitem tipurile de caroserii in res.locals
+// res.locals
 app.use("/*", function(req, res, next) {
   res.locals.tipuriCaroserii = obGlobal.tipuriCaroserii;
+  res.locals.utilizator = req.session.utilizator;
   next();
 });
 
@@ -136,20 +133,97 @@ app.get("/eroare", function (req, res) {
 parolaServer = "tehniciweb";
 
 app.post("/inreg", function (req, res) {
+  console.log("POST Request at '/inreg'");
+
   var formular = new formidable.IncomingForm();
   formular.parse(req, function (err, campuriText, campuriFisier) {
-    console.log(campuriText);
+
+    var eroare = "";
+    if (campuriText.username == "")
+      eroare += "Username necompletat. ";
+    if (!campuriText.username.match(new RegExp("^[A-Za-z0-9]+$")))
+      eroare += "Username contine caractere nepermise. ";
+
+    if (eroare != "") {
+      res.render("pagini/inregistrare", { raspuns: `Eroare: ${eroare}` });
+      return;
+    }
+
+    // Verific daca username-ul exista deja
+    var queryUtiliz = `SELECT username FROM utilizatori WHERE username = '${campuriText.username}';`;
+    client.query(queryUtiliz, function (err, rezQuery) {
+      if (err) {
+        console.log(err);
+        res.render("pagini/inregistrare", { raspuns: `Eroare baza de date` });
+        return;
+      }
+      if (rezQuery.rows.length != 0) {
+        eroare += "Username-ul exista deja. ";
+        res.render("pagini/inregistrare", { raspuns: `Eroare: ${eroare}` });
+        return;
+      }
+      else {
+        // Inserez noul utilizator cu parola criptata
+        var parolaCriptata = crypto.scryptSync(campuriText.parola, parolaServer, 64).toString("hex");
+        var comandaInserare = 
+          "INSERT INTO utilizatori (username, nume, prenume, parola, email, culoare_chat) " +
+          `VALUES (
+            '${campuriText.username}',
+            '${campuriText.nume}',
+            '${campuriText.prenume}',
+            '${parolaCriptata}',
+            '${campuriText.email}',
+            '${campuriText.culoare_chat}'
+          );`;
+
+        client.query(comandaInserare, function (err, rezInserare) {
+          if (err) {
+            console.log(err);
+            res.render("pagini/inregistrare", { raspuns: `Eroare baza de date` });
+          }
+          else
+            res.render("pagini/inregistrare", { raspuns: "Datele au fost introduse." });
+        });
+      }
+    });
+  });
+});
+
+app.post("/login", function (req, res) {
+  console.log("POST Request at '/login'");
+
+  var formular = new formidable.IncomingForm();
+  formular.parse(req, function (err, campuriText, campuriFisier) {
+    // Preiau din BD datele utilizatorului
     var parolaCriptata = crypto.scryptSync(campuriText.parola, parolaServer, 64).toString("hex");
-    var comandaInserare = 
-      "INSERT INTO utilizatori (username, nume, prenume, parola, email, culoare_chat) " +
-      `VALUES ('${campuriText.username}', '${campuriText.nume}', '${campuriText.prenume}', '${parolaCriptata}', '${campuriText.email}', '${campuriText.culoare_chat}');`;
-    console.log(comandaInserare);
-    client.query(comandaInserare, function (err, rezInserare) {
+    var querySelect = `SELECT * FROM utilizatori WHERE username = '${campuriText.username}' AND parola = '${parolaCriptata}';`;
+    client.query(querySelect, function(err, rezQuery) {
       if (err)
         console.log(err);
+      else if (rezQuery.rows.length == 1) { // am utilizatorul si credentialele sunt corecte
+        req.session.utilizator = {
+          nume: rezQuery.rows[0].nume,
+          prenume: rezQuery.rows[0].prenume,
+          username: rezQuery.rows[0].username,
+          rol: rezQuery.rows[0].rol,
+          email: rezQuery.rows[0].email,
+          culoare_chat: rezQuery.rows[0].culoare_chat
+        }
+        console.log(req.session.utilizator);
+        res.redirect("/index");
+      }
+      else {
+        console.log("Login esuat!");
+        res.send(":(");
+      }
     });
-    res.send("OK");
   });
+});
+
+app.get("/logout", function (req, res) {
+  req.session.destroy();
+  res.locals.utilizator = null;
+  res.render("pagini/logout");
 });
 
 // Eroare 403
@@ -447,6 +521,31 @@ function getDotariFromDB() {
           obGlobal.dotari.toate.add(dotare);
     }
   });
+}
+
+async function trimiteMail(email, subiect, mesajText, mesajHtml, atasamente = []){
+  var transp = nodemailer.createTransport({
+		service: "gmail",
+		secure: false,
+		auth: { // date login 
+			user: obGlobal.emailServer,
+			pass: "rwgmgkldxnarxrgu"
+		},
+		tls: {
+			rejectUnauthorized:false
+		}
+  });
+
+  //genereaza html
+  await transp.sendMail({
+		from:obGlobal.emailServer,
+		to:email,
+		subject:subiect,//"Te-ai inregistrat cu succes",
+		text:mesajText, //"Username-ul tau este "+username
+		html: mesajHtml,// `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${username}.</p> <p><a href='http://${numeDomeniu}/cod/${username}/${token}'>Click aici pentru confirmare</a></p>`,
+		attachments: atasamente
+  })
+  console.log("trimis mail");
 }
 
 var s_port = process.env.PORT || 5000;

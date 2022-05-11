@@ -85,11 +85,11 @@ nav ul.menu ul a {
 nav ul.menu ul li:hover a {
   text-decoration-color: rgb(255, 255, 255);
 }
-nav #container-btn-tema {
-  height: 100%;
+nav .menu-right {
+  float: right;
 }
 nav #container-btn-tema button {
-  float: right;
+  background-color: transparent;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -120,18 +120,6 @@ nav #container-btn-tema button {
 }
 /* Medium screen */
 @media screen and (min-width: 700px) and (max-width: 1024px) {
-  /* Ascund butonul pentru meniu mare */
-  nav ul.menu > li:nth-child(1) > div:nth-child(1) {
-    display: none;
-  }
-
-  /* Pun pe ecran butonul pentru meniu mediu */
-  nav ul.menu > li:nth-child(1) > div:nth-child(2) {
-    display: block;
-  }
-}
-/* Small screen */
-@media screen and (max-width: 700px) {
   /* Ascund butonul pentru meniu mare */
   nav ul.menu > li:nth-child(1) > div:nth-child(1) {
     display: none;

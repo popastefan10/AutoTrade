@@ -118,11 +118,13 @@ nav {
     }
   }
 
-  #container-btn-tema {
-    height: 100%;
+  .menu-right {
+    float: right;
+  }
 
+  #container-btn-tema {
     button {
-      float: right;
+      background-color: transparent;
       margin: 0;
       padding: 0;
 
@@ -159,19 +161,6 @@ nav {
 
 /* Medium screen */
 @media screen and (min-width: 700px) and (max-width: 1024px) {
-  /* Ascund butonul pentru meniu mare */
-  nav ul.menu > li:nth-child(1) > div:nth-child(1) {
-    display: none;
-  }
-
-  /* Pun pe ecran butonul pentru meniu mediu */
-  nav ul.menu > li:nth-child(1) > div:nth-child(2) {
-    display: block;
-  }
-}
-
-/* Small screen */
-@media screen and (max-width: 700px) {
   /* Ascund butonul pentru meniu mare */
   nav ul.menu > li:nth-child(1) > div:nth-child(1) {
     display: none;
