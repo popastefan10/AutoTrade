@@ -1,5 +1,5 @@
 # AutoTrade
-Site la care lucrez pentru cursul de Tehnici Web.
+Site la care lucrez pentru cursul de Tehnici Web, poate fi accesat [aici](https://frozen-everglades-33559.herokuapp.com/).
 
 ## Prerequisites
 * Trebuie instalat [PostgreSQL](https://www.postgresql.org/download/). Dupa ce s-a instalat trebuie adaugat folder-ul `PostgreSQL\14\bin` in `PATH` 
